@@ -1,0 +1,27 @@
+﻿@using NPI.Flow.Model;
+@using OThinker.H3.WorkflowTemplate;
+@{
+    Layout = null;
+    List<FlowNodeModel> nodeList = Model as List<FlowNodeModel>;
+}
+
+<div class="flow-chart">
+    @foreach (var node in nodeList)
+    {
+        ActivityType type = (ActivityType)node["ActivityType"];
+        bool isApproved = (bool)node["IsApproved"];
+        string state = isApproved ? "finished" : (node.IsCurrentNode ? "current" : "");
+
+        <div class="flow-activity @state">
+            <span class="flow-activity-icon flow-activity-icon-@type"></span>
+            <div class="flow-activity-label">@node.NodeName</div>
+        </div>
+
+        if (type != ActivityType.End)
+        {
+            <div class="flow-arrow">
+                <span class="glyphicon glyphicon-arrow-down"></span>
+            </div>
+        }
+    }
+</div>

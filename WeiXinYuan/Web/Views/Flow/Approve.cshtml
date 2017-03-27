@@ -1,0 +1,14 @@
+﻿@using NPI.Flow.Model;
+@using NPI.Flow.Entity;
+@using DogNet.Flow.Model;
+@{
+    Layout = null;
+    List<FlowNodeModel> nodeList = Model as List<FlowNodeModel>;
+    var instanceId = ViewBag.instanceId;
+}
+
+@foreach (var node in nodeList)
+{
+    NodeViewEntity viewEntity = NodeViewEntity.GetView(node.FlowId, node.NodeId);
+    @Html.Action(viewEntity.Action, viewEntity.Controller, new { obj = node, instanceId = instanceId });
+}

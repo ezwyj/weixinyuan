@@ -1,12 +1,13 @@
-﻿@{
-    var user = NPI.Account.Service.UserService.GetCurrUser();
+﻿
+@{
+    var user = Account.Service.UserService.GetCurrUser();
 
     if (user == null)
     {
         Response.Redirect("~/Account/Login");
         return;
     }
-    var right = NPI.Right.Entity.RightEntity.GetListByProperty(a => a.RightUser, user.Badge).FirstOrDefault();
+    var right = Right.Entity.RightEntity.GetListByProperty(a => a.RightUser, user.Name).FirstOrDefault();
 }
 <!DOCTYPE html>
 <html>
@@ -43,31 +44,29 @@
                 </button>
                 <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                     <i class="glyphicon glyphicon-home"></i>
-                    缺陷管理
+                    后台管理
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav">
                    
-                    <li id="menu-npi-index"><a href="@Url.Action("Index", "NPI")">首页</a></li>
-                    <li id="menu-npi-create"><a href="@Url.Action("Create", "NPI")">提交缺陷</a></li>
-                    <li id="menu-npi-approveList"><a href="@Url.Action("ApproveList", "NPI")">审批列表</a></li>
-                    
+                    <li id="menu-0"><a href="@Url.Action("Index", "Home")">首页</a></li>
+                    <li id="menu-1"><a href="@Url.Action("XinYuanIndex", "Manage")">心愿管理</a></li>
+                    <li id="menu-2"><a href="@Url.Action("HuoDongIndex", "Manage")">活动管理</a></li>
+                    <li id="menu-2"><a href="@Url.Action("ChangDiIndex", "Manage")">场地管理</a></li>
+                    <li id="menu-system-setting"><a href="@Url.Action("Setting", "System")">系统设置</a></li>
                     @if (right != null)
                     {
 
                         if (right.RightName.Contains("值集维护")  ||  right.RightName.Contains("权限设置"))
                         {
-                            <li id="menu-system-setting"><a href="@Url.Action("Setting", "System")">系统设置</a></li>
+                           
                         }
                         if (right.RightName.Contains("日志查询"))
                         {
                             <li id="menu-system-log"><a href="@Url.Action("Log", "System")">日志查询</a></li>
                         }
-                        if (right.RightName.Contains("指标图"))
-                        {
-                            <li id="menu-doc-manage"><a href="@Url.Action("Manage", "NPI")">指标图</a></li>
-                        }
+                       
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -88,7 +87,7 @@
         @RenderBody()
     </div>
     <div id="footer">
-        <p class="text-center">Powered by MaiPu ©1993-2016 MaiPu Inc.</p>
+        <p class="text-center">Powered by Fancy ©2008-2016 MaiPu Inc.</p>
     </div>
 
     <script type="text/javascript" src="@Url.Content("~/assets/js/lib/require.min.js")"></script>

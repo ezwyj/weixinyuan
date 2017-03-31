@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<ValueSet.Entity.ValueSetEntity> SQList = ViewBag.SQList as List<ValueSet.Entity.ValueSetEntity>;
+}
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h4 class="panel-title">列表</h4>
+        <div class="panel-option">
+            <button class="btn btn-sm btn-primary" id="query">查询</button>
+            <a class="btn btn-sm btn-default" href="~/Manage/XinYuanDetail?Id=0">增加</a>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="query-condition">
+            
+            <div class="row item-row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">社区</div>
+                        <div class="item-control">
+                           
+                            <select class="form-control" id="sqlist">
+                                <option value="">全部</option>
+                                @foreach (var sq in SQList)
+                                {
+                                    <option value="@sq.Id" >@sq.Text</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">姓名：</div>
+                        <div class="item-control">
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="query-result" id="result-list">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts {
+    <script>
+        OP_CONFIG.module = 'Manage';
+        OP_CONFIG.page = 'XinYuanindex';
+    </script>
+}

@@ -1,0 +1,72 @@
+﻿
+@{
+    
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>微心愿</title>
+    <!--Custom Theme files-->
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" media="all" />
+    <!--Custom Theme files-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style type="text/css">
+        <!--
+        .STYLE1 {
+            font-size: 30px;
+        }
+
+        .STYLE2 {
+            font-size: 18px;
+        }
+
+        .STYLE5 {
+            color: #666666;
+        }
+
+        .STYLE6 {
+            color: #dc0000;
+        }
+
+        .STYLE8 {
+            font-size: 12px;
+        }
+
+        .STYLE9 {
+            font-size: 8px;
+        }
+        -->
+    </style>
+    <script>
+        var OP_CONFIG = {
+            rootUrl: '@Url.Content("~")'
+        };
+    </script>
+    @RenderSection("scripts", false)
+</head>
+<body>
+    <!--- header-top ---->
+    <div id="home" class="header-top">
+        <!--- container ---->
+        <div class="container">
+            
+            @RenderBody()
+        </div>
+    </div>
+
+
+    </div>
+    <!--- 底部 ---->
+    <div style="width:100%; height:47px;position:fixed;    bottom:0; background-color:#000000">
+        <div style="width:25%; height:47px;float:left;"><a href="index.html"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="index1.html"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="index2.html"><img src="@Url.Content("~/Content/images/场地预约.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="index3.html"><img src="@Url.Content("~/Content/images/关于我.png")" width="90" height="47" /></a></div>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/lib/require.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/main.js")"></script>
+</body>
+</html>

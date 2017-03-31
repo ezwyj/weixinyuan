@@ -1,0 +1,165 @@
+﻿@using Common.Util;
+@{
+    ViewBag.Title = "Detail";
+    Core.Entity.XinYuan targetObject = Model as Core.Entity.XinYuan;
+    List<ValueSet.Entity.ValueSetEntity> SQList = ViewBag.SQList as List<ValueSet.Entity.ValueSetEntity>;
+    List<ValueSet.Entity.ValueSetEntity> stateList = ViewBag.stateList as List<ValueSet.Entity.ValueSetEntity>;
+}
+
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/assets/plugins/datepicker/bootstrap-datepicker.min.css")" />
+}
+
+<input id="id" type="hidden" value="@targetObject.Id" />
+
+<div class="container page-body">
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h5>
+                    编号：<span class="npi-no">@targetObject.Id</span>
+                    摘要：<span class="npi-title">@targetObject.Title</span>
+                </h5>
+                <div class="panel-option">
+                    <button class="btn btn-sm btn-primary" id="save">保存</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row item-row">
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name">提交人：</div>
+                            <div class="item-static"><input type="text" class="form-control" id="name" value="@targetObject.Name"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name">社区：</div>
+                            <div class="item-static">
+                                <select class="form-control" id="sqlist">
+                                    @foreach (var sq in SQList)
+                                    {
+                                        <option value="@sq.Id" @Html.Raw(sq.Value == targetObject.SQ ? "selected" : "")>@sq.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name">状态：</div>
+                            <div class="item-static">
+                                <select class="form-control" id="statuslist">
+                                    @foreach (var state in stateList)
+                                    {
+                                        <option value="@state.Value" @Html.Raw(state.Value == targetObject.Status.ToString() ? "selected" : "")>@state.Text</option>
+                                    }
+                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row item-row">
+                    <div class="col-md-12">
+                        <div class="item">
+                            <div class="item-name">标题：</div>
+                            <div class="item-static reason-desc">
+                                <input type="text" class="form-control" id="title" value="@targetObject.Title" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">理由：</div>
+                        <div class="item-static reason-desc">
+                            <textarea class="form-control" style="height: 100px;" id="ly" data-uitype="validate" data-rules="[{reg: /^.{1,400}$/, msg: '请输入1-400个字符'}]">@targetObject.LY</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">图片：</div>
+                        <div class="item-control">
+                            <img src="" width="200px" height="200px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row item-row">
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name">电话：</div>
+                            <div class="item-static"><input type="text" class="form-control" id="telephone" value="@targetObject.Telephone"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name">提交时间：</div>
+                            <div class="item-static">
+                                <input id="inputtime" value="@targetObject.InputTime" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="item-name"></div>
+                            <div class="item-static">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+   
+
+    <div class="panel panel-success approve-history" data-expand="Y">
+        <div class="panel-heading">
+            <h5>认领人员</h5>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed" id="Approvehistory">
+                <thead>
+                    <tr>
+                        <th>认领人</th>
+                        <th>电话</th>
+                        <th>认领时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in targetObject.RLR)
+                    {
+
+                            <tr>
+                                <td>@row.Name</td>
+                                <td>@row.Telephone</td>
+                                <td>@row.InputTime</td>
+
+                             </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+    
+</div>
+
+
+
+@section scripts {
+    <script>
+        OP_CONFIG.module = 'Manage';
+        OP_CONFIG.page = 'XinYuandetail';
+
+    XinYuanModel = @Html.Raw(Serializer.ToJson<Core.Entity.XinYuan>(Model));
+    </script>
+}

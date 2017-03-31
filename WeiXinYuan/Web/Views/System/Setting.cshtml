@@ -1,6 +1,4 @@
-﻿
-@using NPI.Account.Entity;
-@using NPI.ValueSet.Entity;
+﻿@using ValueSet.Entity
 @{
     ViewBag.Title = "系统设置";
     List<ValueSetEntity> setList = (List<ValueSetEntity>)ViewBag.setList;
@@ -92,12 +90,8 @@
         {{else}}
             <div class="item-control">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="user-list" readonly>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default selector-organiztion" data-type="multiPeople">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <input type="text" class="form-control" id="user-list" >
+                    
                 </div>
             </div>
         {{/if}}
@@ -108,8 +102,6 @@
             <label><input type="checkbox" class="form-contorl" value="权限设置" {{rightList.indexOf('权限设置') > -1 ? ' checked': ''}}> 权限设置</label>
             <label><input type="checkbox" class="form-contorl" value="值集维护" {{rightList.indexOf('值集维护') > -1 ? ' checked': ''}}> 值集维护</label>
             <label><input type="checkbox" class="form-contorl" value="日志查询" {{rightList.indexOf('日志查询') > -1 ? ' checked': ''}}> 日志查询</label>
-            <label><input type="checkbox" class="form-contorl" value="指标图"   {{rightList.indexOf('指标图')> -1    ?   ' checked': ''}}> 指标图</label>
-            <label><input type="checkbox" class="form-contorl" value="报表导出" {{rightList.indexOf('报表导出') > -1 ? ' checked': ''}}> 报表导出</label>
             
 
 

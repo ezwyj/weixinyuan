@@ -13,12 +13,21 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            string badge = HttpContext.User.Identity.Name;
-
-            if (!Service.RightService.IsHaveRight(badge, "首页查看"))
+            var user = Account.Service.UserService.GetCurrUser();
+            if (user == null)
             {
-                Response.Redirect("~/NPI/Index", true);
-                return null;
+                ViewBag.errorMsg = "用户名、密码错误！";
+                string backPage = Request["backPage"];
+                if (!string.IsNullOrEmpty(backPage))
+                {
+                    return RedirectToAction("Login", "Account", new { BackPage = backPage });
+
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
             }
 
             return View();

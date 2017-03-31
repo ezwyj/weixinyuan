@@ -8,35 +8,32 @@ using DogNet.Repositories;
 
 namespace Account.Entity
 {
-    [RepositoryEntity(DefaultConnName = "EHR")]
-    [PetaPoco.TableName("yuangong")]
-    [PetaPoco.PrimaryKey("gh")]
+    [RepositoryEntity(DefaultConnName = "DB")]
+    [PetaPoco.TableName("User")]
+    [PetaPoco.PrimaryKey("Id")]
     public class UserEntity : Repository<UserEntity>
     {
-        [PetaPoco.Column("gh")]
-        public int UserId { get; set; }
-        [PetaPoco.Column("xingming")]
-        public string Name { get; set; }
-        [PetaPoco.Column("CompanyMail")]
-        public string Email { get; set; }
+        [PetaPoco.Column("Id")]
+        public int Id { get; set; }
 
-        [PetaPoco.Ignore]
-        public string Badge
+        [PetaPoco.Column("Name")]
+        public string Name { get; set; }
+
+        [PetaPoco.Column("Role")]
+        public string Role { get; set; }
+
+        [PetaPoco.Column("Unit")]
+        public string Unit
         {
-            get
-            {
-                return UserId.ToString().PadLeft(6, '0');
-            }
+            get;
+            set;
         }
-        //[PetaPoco.Ignore]
-        //public string dep
-        //{
-        //    get
-        //    {
-        //        Database db = new Database("EHR");
-        //        string sql = "select b.mingcheng as dep from yuangong y, bm b, yg_bm yb where y.gh='" + UserId + "' and y.ygid=yb.ygid and b.id=yb.bmid";
-        //        return db.Fetch<string>(sql).FirstOrDefault();
-        //    }
-        //}
+        public string Password { get; set; }
+
+        public DateTime LastLoginTime { get; set; }
+
+        public string weixinOpenId { get; set; }
+
+        public string Mobile { get; set; }
     }
 }

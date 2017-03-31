@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Core</RootNamespace>
     <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DogNet.Common">
+      <HintPath>..\..\REF\DogNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DogNet.Repositories">
+      <HintPath>..\..\REF\DogNet.Repositories.dll</HintPath>
+    </Reference>
+    <Reference Include="PetaPoco">
+      <HintPath>..\..\REF\PetaPoco.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,11 +51,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\HuoDong.cs" />
+    <Compile Include="Entity\HuoDongAdd.cs" />
+    <Compile Include="Entity\HuoDongAttion.cs" />
     <Compile Include="Entity\XinYuan.cs" />
+    <Compile Include="Entity\XinYuanAttion.cs" />
+    <Compile Include="Entity\XinYuanRenLing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Account\Account.csproj">
+      <Project>{213b46ef-3de5-4b97-8f72-d8f1b8e53ffa}</Project>
+      <Name>Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{cd688199-38c6-41b3-a3f3-a84f952bb6a2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValueSet\ValueSet.csproj">
+      <Project>{5fc2e226-6222-4704-b1cc-a3735e605125}</Project>
+      <Name>ValueSet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

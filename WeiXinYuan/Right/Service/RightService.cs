@@ -70,16 +70,16 @@ namespace Service
 
         public static List<RightEntity> SearchList(string rightUser)
         {
-            string sql = "select * from npi_right where 1=1";
+            string sql = "select * from right where 1=1";
 
             if (!string.IsNullOrEmpty(rightUser))
             {
-                List<UserEntity> userList = UserService.GetUserListByFilter(rightUser, rightUser, 0);
+                List<UserEntity> userList = new List<UserEntity>(); //toDo: UserService.GetUserListByFilter(rightUser, rightUser, 0);
                 List<string> filter = new List<string>();
 
                 foreach (var user in userList)
                 {
-                    filter.Add("RightUser = '" + user.Badge + "'");
+                    filter.Add("RightUser = '" + user.Id + "'");
                 }
 
                 if (filter.Count > 0)

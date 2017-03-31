@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DogNet.Repositories;
+using PetaPoco;
+using Account.Entity;
 
 namespace Core.Entity
 {
+    [RepositoryEntity(DefaultConnName = "DB")]
+    [PetaPoco.TableName("XinYuan")]
+    [PetaPoco.PrimaryKey("Id")]
     public class XinYuan :Repository<XinYuan> 
     {
         public int Id { get; set; }
@@ -30,20 +35,42 @@ namespace Core.Entity
         public string Name { get; set; }
 
         //发布人帐号
-        public int PublishId { get; set; }
+        public string PublishWeixinOpenId { get; set; }
 
         public string Telephone { get; set; } 
 
         public StatusEnum Status { get; set; }
-
+        [Ignore]
         public string StateExp { get
             {
                 return Enum.GetName(typeof(StatusEnum), Status);
             }
         }
-        public DateTime BegingTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime InputTime { get; set; }
 
+        [Ignore]
+        public string InputTimeExp
+        {
+            get { return InputTime.ToString(); }
+        }
+
+        [Ignore]
+        public string SQExp { get {
+                return !string.IsNullOrEmpty(SQ)?ValueSet.Entity.ValueSetEntity.GetSingle(SQ).Text:"";
+            } }
+        /// <summary>
+        /// 认领人
+        /// </summary>
+        [Ignore]
+        public List<XinYuanRenLing> RLR
+        {
+            get
+            {
+                return XinYuanRenLing.GetListByProperty(a => a.XinyuanId, Id);
+                
+
+            }
+        }
     }
 
     public enum StatusEnum

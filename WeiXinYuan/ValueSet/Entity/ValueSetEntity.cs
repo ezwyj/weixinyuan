@@ -7,8 +7,8 @@ using PetaPoco;
 
 namespace ValueSet.Entity
 {
-    [RepositoryEntity(DefaultConnName = "ValueSet")]
-    [PetaPoco.TableName("ValueSet_valueSet")]
+    [RepositoryEntity(DefaultConnName = "DB")]
+    [PetaPoco.TableName("valueSet")]
     [PetaPoco.PrimaryKey("Id")]
     public class ValueSetEntity : Repository<ValueSetEntity>
     {

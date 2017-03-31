@@ -8,8 +8,8 @@ using Account.Entity;
 
 namespace Right.Entity
 {
-    [RepositoryEntity(DefaultConnName = "Right")]
-    [PetaPoco.TableName("Right_right")]
+    [RepositoryEntity(DefaultConnName = "DB")]
+    [PetaPoco.TableName("Right")]
     [PetaPoco.PrimaryKey("Id")]
     public class RightEntity : Repository<RightEntity>
     {

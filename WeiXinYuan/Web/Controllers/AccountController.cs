@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Account.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,35 +23,42 @@ namespace Web.Controllers
 
             System.Web.Security.FormsAuthentication.SetAuthCookie(username, true);
             System.Web.Security.FormsAuthentication.RedirectFromLoginPage(username, false);
-            return null;
+            if (!(string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)))
+            {
+                string msg = string.Empty;
+                bool result = false;
 
-            //if (!(string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)))
-            //{
-            //    string msg = string.Empty;
-            //    bool result = false;
+                var logintUsers = UserEntity.GetListByProperty(a => a.Name, username).SingleOrDefault();
+                if (logintUsers == null)
+                {
+                    ViewBag.errorMsg = "用户名、密码不能为空！";
+                    return View();
+                }
+                result = logintUsers.Password == password;
 
-            //    AdService.AuthenAdServerSoapClient authenServer = new AdService.AuthenAdServerSoapClient();
-            //    result = authenServer.AdLogin(username, password, ref msg);
+                if (result)
+                {
+                    System.Web.Security.FormsAuthentication.SetAuthCookie(username, true);
+                    System.Web.Security.FormsAuthentication.RedirectFromLoginPage(username, false);
+                    ViewBag.username = logintUsers.Name;
+                    return RedirectToAction("Index", "Home");//
 
-            //    if (result)
-            //    {
-            //        System.Web.Security.FormsAuthentication.SetAuthCookie(username, true);
-            //        System.Web.Security.FormsAuthentication.RedirectFromLoginPage(username, false);
-            //        return null;
-            //    }
-            //    else
-            //    {
-            //        ViewBag.errorMsg = msg;
-            //    }
-            //}
-            //else
-            //{
-            //    ViewBag.errorMsg = "用户名、密码不能为空！";
-            //}
 
-            //ViewBag.username = username;
+                }
+                else
+                {
+                    ViewBag.errorMsg = "登录用户名或密码错误";
 
-            //return View();
+                }
+            }
+            else
+            {
+                ViewBag.errorMsg = "用户名、密码不能为空！";
+            }
+
+
+
+            return View();
         }
 
         // GET: 登出

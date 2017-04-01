@@ -215,6 +215,8 @@
     <Content Include="assets\img\tn-icon-file.png" />
     <Content Include="assets\img\upload_btn.png" />
     <Content Include="assets\img\user.png" />
+    <Content Include="assets\js\app\Manage\ChangDiDetail.js" />
+    <Content Include="assets\js\app\Manage\ChangDiIndex.js" />
     <Content Include="assets\js\app\Manage\HuoDongDetail.js" />
     <Content Include="assets\js\app\Manage\HuoDongIndex.js" />
     <Content Include="assets\js\app\system\log.js" />
@@ -371,6 +373,8 @@
     <Content Include="Views\Mobile\Index.cshtml" />
     <Content Include="Views\Manage\HuoDongIndex.cshtml" />
     <Content Include="Views\Manage\HuoDongDetail.cshtml" />
+    <Content Include="Views\Manage\ChangDiIndex.cshtml" />
+    <Content Include="Views\Manage\ChangDiDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

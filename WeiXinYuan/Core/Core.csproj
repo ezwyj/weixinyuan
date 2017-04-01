@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ChangDi.cs" />
+    <Compile Include="Entity\ChangDiAdd.cs" />
     <Compile Include="Entity\HuoDong.cs" />
     <Compile Include="Entity\HuoDongAdd.cs" />
     <Compile Include="Entity\HuoDongAttion.cs" />

@@ -16,6 +16,7 @@ namespace Web.Controllers
         //
         // GET: /Manage/
         static int SQ = int.Parse(ConfigurationManager.AppSettings["sq"].ToString());
+        static int Class = int.Parse(ConfigurationManager.AppSettings["class"].ToString());
         public ActionResult XinYuanIndex()
         {
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
@@ -104,7 +105,7 @@ namespace Web.Controllers
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
             return View();
         }
-        private Page<T> getSearch<T>(int pageIndex,int pageSize,string sq,string name,out string msg)
+        private Page<T> getSearch<T>(int pageIndex,int pageSize,string table ,string sq,string name,out string msg)
         {
             
 
@@ -113,7 +114,7 @@ namespace Web.Controllers
             try
             {
                 Sql sql = new Sql();
-                sql.Append("select * from huodong with(nolock) where 1=1 ");
+                sql.Append("select * from "+ table +" with(nolock) where 1=1 ");
                 if (!string.IsNullOrEmpty(sq)) sql.Append(" and sq like @0", "%" + sq + "%");
                 if (!string.IsNullOrEmpty(name)) sql.Append(" and name like @0", "%" + name + "%");
                 Page = XinYuan.DefaultDB.Page<T>(pageIndex, pageSize, sql);
@@ -135,7 +136,7 @@ namespace Web.Controllers
             string msg = string.Empty;
             long total = 0;
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
-            Page<HuoDong> Page = getSearch<HuoDong>(pageIndex, pageSize, sq, name,out msg );
+            Page<HuoDong> Page = getSearch<HuoDong>(pageIndex, pageSize,"HuoDong", sq, name,out msg );
             total = Page.Items == null ? 0 : Page.TotalItems;
             List<HuoDong> serachList = Page.Items;
 
@@ -170,6 +171,7 @@ namespace Web.Controllers
 
         }
 
+
         [HttpPost]
         public JsonResult HuoDongDetail(string dataJson)
         {
@@ -180,6 +182,68 @@ namespace Web.Controllers
             {
                 string badge = HttpContext.User.Identity.Name;
                 HuoDong postModel = Serializer.ToObject<HuoDong>(dataJson);
+                postModel.Save(out msg);
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
+
+
+        public ActionResult ChangDiIndex()
+        {
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            
+            return View();
+        }
+        public JsonResult ChangDiSearchList(int pageIndex, int pageSize, string sq, string name)
+        {
+            bool state = true;
+            string msg = string.Empty;
+            long total = 0;
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            ViewBag.ClassList = ValueSetService.GetValueList(Class, true);
+            Page<ChangDi> Page = getSearch<ChangDi>(pageIndex, pageSize,"ChangDi", sq, name, out msg);
+            total = Page.Items == null ? 0 : Page.TotalItems;
+            List<ChangDi> serachList = Page.Items;
+
+            return new JsonResult { Data = new { state = state, msg = msg, data = serachList, total = total }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+        public ActionResult ChangDiDetail(int id)
+        {
+            ChangDi entity = null;
+            if (id == 0)
+            {
+                entity = new ChangDi();
+                entity.InputTime = DateTime.Now;
+            }
+            else
+            {
+                entity = Core.Entity.ChangDi.GetSingle(id);
+            }
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            ViewBag.ClassList = ValueSetService.GetValueList(Class, true);
+            List<ValueSet.Entity.ValueSetEntity> statelist = new List<ValueSet.Entity.ValueSetEntity>();
+           
+            return View(entity);
+
+        }
+
+        [HttpPost]
+        public JsonResult ChangDiDetail(string dataJson)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                ChangDi postModel = Serializer.ToObject<ChangDi>(dataJson);
                 postModel.Save(out msg);
             }
             catch (Exception e)

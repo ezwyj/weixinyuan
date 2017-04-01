@@ -1,0 +1,253 @@
+﻿@using Common.Util;
+@{
+    ViewBag.Title = "Detail";
+    Core.Entity.ChangDi targetObject = Model as Core.Entity.ChangDi;
+    List<ValueSet.Entity.ValueSetEntity> SQList = ViewBag.SQList as List<ValueSet.Entity.ValueSetEntity>;
+    List<ValueSet.Entity.ValueSetEntity> ClassList = ViewBag.ClassList as List<ValueSet.Entity.ValueSetEntity>;
+}
+
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/assets/plugins/datepicker/bootstrap-datepicker.min.css")" />
+}
+
+<input id="id" type="hidden" value="@targetObject.Id" />
+
+<div class="container page-body">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h5>
+                场地编号：<span class="npi-no">@targetObject.Id</span>
+                
+            </h5>
+            <div class="panel-option">
+                <button class="btn btn-sm btn-primary" id="save">保存</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row item-row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">提交人：</div>
+                        <div class="item-static"><input type="text" class="form-control" id="intputname" value="@targetObject.InputName"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">社区：</div>
+                        <div class="item-static">
+                            <select class="form-control" id="sqlist">
+                                @foreach (var sq in SQList)
+                                {
+                                    <option value="@sq.Id" @Html.Raw(sq.Value == targetObject.SQ ? "selected" : "")>@sq.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">地址</div>
+                        <div class="item-static">
+                            <input type="text" class="form-control" id="address" value="@targetObject.Address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">标题：</div>
+                        <div class="item-static reason-desc">
+                            <input type="text" class="form-control" id="title" value="@targetObject.Title" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">介绍：</div>
+                        <div class="item-static reason-desc">
+                            <textarea class="form-control" style="height: 100px;" id="Content" data-uitype="validate" data-rules="[{reg: /^.{1,400}$/, msg: '请输入1-400个字符'}]">@targetObject.Content</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">情况：</div>
+                        <div class="item-static reason-desc">
+                            <textarea class="form-control" style="height: 100px;" id="qingkong" data-uitype="validate" data-rules="[{reg: /^.{1,400}$/, msg: '请输入1-400个字符'}]">@targetObject.Content</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-12">
+                    <div class="item">
+                        <div class="item-name">图片：</div>
+                        <div class="item-control">
+                            
+                            @if (targetObject.Images != null)
+                            {
+                                foreach (var file in targetObject.Images)
+                                {
+                                    <div class="finish-queue-item">
+                                        <span class="icon @Common.Util.FileHandler.GetFileIcon(file.FileType)"></span>
+                                        <span class="file-name" title="@file.FileName">@file.FileName</span>
+                                        <span class="file-size">@Common.Util.FileHandler.getFileSize(file.FileSize)</span>
+                                        <a class="file-operate" href="@Url.Content("~/Common/DownloadAttachment?id=" + file.Id)">下载</a>&nbsp;
+
+
+
+                                    </div>
+                                }
+                            }
+                            
+                            <button class="btn btn-sm btn-primary" id="select-attachment">　附件　</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">最大承载人数：</div>
+                        <div class="item-static"><input type="text" class="form-control" id="max" value="@targetObject.Max"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">使用时间：</div>
+                        <div class="item-static">
+                            <input id="canusetime" value="@targetObject.CanUseTime" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name"></div>
+                        <div class="item-static">
+                            <div class="item-name">联系人</div>
+                            <div class="item-static">
+                                <input id="max" value="@targetObject.Name" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">类型：</div>
+                        <div class="item-static">
+                            <select class="form-control" id="sqlist">
+                                @foreach (var ci in ClassList)
+                                {
+                                    <option value="@ci.Id" @Html.Raw(ci.Value == targetObject.Class ? "selected" : "")>@ci.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">价格：</div>
+                        <div class="item-static">
+                            <input id="money" value="@targetObject.Money" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name"></div>
+                        <div class="item-static">
+
+                            <div class="item-name">联系电话</div>
+                            <div class="item-static">
+                                <input id="telephone" value="@targetObject.Telephone" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">价格：</div>
+                        <div class="item-static"><input type="text" class="form-control" id="endtime" value="@targetObject.Money"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name">使用次数：</div>
+                        <div class="item-static">
+                            <input id="address" value="@targetObject.UseTime" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="item-name"></div>
+                        <div class="item-static">
+                            <div class="item-name">提交时间：</div>
+                            <div class="item-static">
+                                <input id="inputtime" value="@targetObject.InputTime" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="panel panel-success approve-history" data-expand="Y">
+        <div class="panel-heading">
+            <h5>预约人员</h5>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed" id="Approvehistory">
+                <thead>
+                    <tr>
+                        <th>人员</th>
+                        <th>预约时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @if (targetObject.Add != null)
+                    {
+                        foreach (var row in targetObject.Add)
+                        {
+
+                            <tr>
+                                <td>@row.Name</td>
+                                <td>@row.InputTimeExp</td>
+
+                            </tr>
+                        }
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts {
+    <script>
+        OP_CONFIG.module = 'Manage';
+        OP_CONFIG.page = 'ChangDidetail';
+
+        ChangDiModel = @Html.Raw(Serializer.ToJson<Core.Entity.ChangDi>(Model));
+    </script>
+}

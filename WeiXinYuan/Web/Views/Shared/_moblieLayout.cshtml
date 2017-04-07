@@ -45,6 +45,55 @@
             rootUrl: '@Url.Content("~")'
         };
     </script>
+    <script>
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: AppId, // 必填，公众号的唯一标识
+        timestamp: Timestamp, // 必填，生成签名的时间戳
+        nonceStr: NonceStr, // 必填，生成签名的随机串
+        signature: Signature,// 必填，签名
+            jsApiList: [
+                    'checkJsApi',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareWeibo',
+                    'hideMenuItems',
+                    'showMenuItems',
+                    'hideAllNonBaseMenuItem',
+                    'showAllNonBaseMenuItem',
+                    'chooseImage',
+                    'previewImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'getNetworkType',
+                    'hideOptionMenu',
+                    'showOptionMenu',
+                    'closeWindow',
+                    'scanQRCode',
+                    'chooseWXPay',
+                    'openProductSpecificView'
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2。详见：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+        });
+
+        wx.error(function (res) {
+            console.log(res);
+            alert('验证失败');
+        });
+
+        wx.ready(function () {
+            var images = {
+                localId: [],
+                serverId: []
+            };
+
+            
+
+            
+        });
+
+
+    </script>
     @RenderSection("scripts", false)
 </head>
 <body>
@@ -61,10 +110,10 @@
     </div>
     <!--- 底部 ---->
     <div style="width:100%; height:47px;position:fixed;    bottom:0; background-color:#000000">
-        <div style="width:25%; height:47px;float:left;"><a href="index.html"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a></div>
-        <div style="width:25%; height:47px;float:left;"><a href="index1.html"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a></div>
-        <div style="width:25%; height:47px;float:left;"><a href="index2.html"><img src="@Url.Content("~/Content/images/场地预约.png")" width="90" height="47" /></a></div>
-        <div style="width:25%; height:47px;float:left;"><a href="index3.html"><img src="@Url.Content("~/Content/images/关于我.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="@Url.Action("Index","Mobile")"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="@Url.Action("Index2","Mobile")"><img src="@Url.Content("~/Content/images/场地预约.png")" width="90" height="47" /></a></div>
+        <div style="width:25%; height:47px;float:left;"><a href="@Url.Action("Index3","Mobile")"><img src="@Url.Content("~/Content/images/关于我.png")" width="90" height="47" /></a></div>
     </div>
     <script type="text/javascript" src="@Url.Content("~/assets/js/lib/require.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/main.js")"></script>

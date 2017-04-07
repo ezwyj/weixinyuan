@@ -44,7 +44,7 @@
                     <div class="STYLE1" style="width:50%; height:20px;float:left;">
                         <div align="left" class="STYLE5 STYLE8"><font face="黑体">状态：@item.StateExp</font></div>
                     </div>
-                    <div class="STYLE9" style="width:50%; height:20px;float:left;">已查看  <span class="STYLE6">123</span> 次，已关注 <span class="STYLE6">21 </span>人</div>
+                    <div class="STYLE9" style="width:50%; height:20px;float:left;">已查看  <span class="STYLE6">@item.ShowNumber</span> 次，已认领 <span class="STYLE6">@item.RLRS</span>人</div>
                 </div>
                 <div style="width:100%; height:20px; padding-top:15px">
                     <div class="STYLE1" style="width:50%; height:20px;float:left;">
@@ -64,3 +64,14 @@
 
 </div>
 
+@section scripts {
+    <script>
+        OP_CONFIG.module = 'mobile';
+        OP_CONFIG.page = 'index';
+        AppId= @ViewBag.AppId;
+        Timestamp =@ViewBag.Timestamp;
+        NonceStr = @ViewBag.NonceStr;
+        Signature = @ViewBag.Signature;
+    </script>
+
+}

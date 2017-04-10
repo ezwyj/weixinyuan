@@ -381,6 +381,7 @@
     <Content Include="Views\Manage\ChangDiDetail.cshtml" />
     <Content Include="Views\Mobile\Index7.cshtml" />
     <Content Include="Views\Mobile\index1.cshtml" />
+    <Content Include="Views\Mobile\Index4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

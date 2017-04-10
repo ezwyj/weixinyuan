@@ -58,3 +58,17 @@
 
 
 </div>
+
+@section scripts {
+    <script>
+        OP_CONFIG.module = 'mobile';
+        OP_CONFIG.page = 'index';
+        AppId= '@ViewBag.AppId';
+        Timestamp ='@ViewBag.Timestamp';
+        NonceStr = '@ViewBag.NonceStr';
+        Signature = '@ViewBag.Signature';
+    </script>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+}

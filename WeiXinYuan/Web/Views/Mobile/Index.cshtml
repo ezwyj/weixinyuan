@@ -12,7 +12,7 @@
             <div align="right" class="STYLE1"><font color="#FFFFFF" face="黑体">微心愿</font> </div>
         </div>
         <div style=" width:34%; height:50px; float:left;padding-top:26px;">
-            <div align="right"><a href="@Url.Action("index4", "Mobile")"><img src="@Url.Content("~/Content/images/申请发布.png")" height="33" width="86" /></a></div>
+            <div align="right"><a href="@Url.Action("index4", "Mobile",new { id = 0 })"><img src="@Url.Content("~/Content/images/申请发布.png")" height="33" width="86" /></a></div>
         </div>
     </div>
     <div style="width:100%; height:250px; padding-top:0px;background-color:#00a2ac">
@@ -68,10 +68,10 @@
     <script>
         OP_CONFIG.module = 'mobile';
         OP_CONFIG.page = 'index';
-        AppId= @ViewBag.AppId;
-        Timestamp =@ViewBag.Timestamp;
-        NonceStr = @ViewBag.NonceStr;
-        Signature = @ViewBag.Signature;
+        AppId= '@ViewBag.AppId';
+        Timestamp ='@ViewBag.Timestamp';
+        NonceStr = '@ViewBag.NonceStr';
+        Signature = '@ViewBag.Signature';
     </script>
 
 }

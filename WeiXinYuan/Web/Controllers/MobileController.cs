@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ValueSet.Service;
 
 namespace Web.Controllers
 {
@@ -47,6 +48,8 @@ namespace Web.Controllers
             ViewBag.Signature = jsEvn.Signature;
             return View(ChangDi.GetList());
         }
+        static int SQ = int.Parse(ConfigurationManager.AppSettings["sq"].ToString());
+        static int Class = int.Parse(ConfigurationManager.AppSettings["class"].ToString());
         public ActionResult Index3()
         {
             var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
@@ -57,9 +60,28 @@ namespace Web.Controllers
            
             return View();
         }
-        public ActionResult Index4()
+        public ActionResult Index4(int Id)
         {
-            return View();
+            var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
+            ViewBag.AppId = jsEvn.AppId;
+            ViewBag.Timestamp = jsEvn.Timestamp;
+            ViewBag.NonceStr = jsEvn.NonceStr;
+            ViewBag.Signature = jsEvn.Signature;
+            ViewBag.SqList = ValueSetService.GetValueList(SQ, true);
+            XinYuan entity = new XinYuan();
+            string type = "View";
+            if (Id == 0)
+            {
+                type = "Edit";
+                
+            }
+            else
+            {
+                entity = XinYuan.GetSingle(Id);
+            }
+            ViewBag.Type = type;
+
+            return View(entity);
         }
         [HttpPost]
         public JsonResult Index4(string dataJson)

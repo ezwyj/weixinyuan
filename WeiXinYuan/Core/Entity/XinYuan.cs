@@ -28,7 +28,11 @@ namespace Core.Entity
         /// <summary>
         /// 认领人数
         /// </summary>
-        public int RLRS { get; set; }
+        [Ignore]
+        public int RLRS { get
+            {
+                return RLR.Count;
+            } }
 
         public string Image { get; set; }
 

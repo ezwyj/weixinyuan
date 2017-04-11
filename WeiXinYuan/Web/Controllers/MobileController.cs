@@ -27,7 +27,7 @@ namespace Web.Controllers
             ViewBag.Timestamp = jsEvn.Timestamp;
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
-            return View(XinYuan.GetList() );
+            return View(XinYuan.GetListByProperty(a => a.Status, (int)StatusEnum.报名中).ToList());
         }
 
         public ActionResult Index1()
@@ -37,7 +37,7 @@ namespace Web.Controllers
             ViewBag.Timestamp = jsEvn.Timestamp;
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
-            return View(HuoDong.GetList());
+            return View(HuoDong.GetListByProperty(a=>a.Status,(int)StatusEnum.报名中).ToList());
         }
         public ActionResult Index2()
         {
@@ -73,16 +73,59 @@ namespace Web.Controllers
             if (Id == 0)
             {
                 type = "Edit";
-                
+                entity.InputTime = DateTime.Now;
             }
             else
             {
                 entity = XinYuan.GetSingle(Id);
+                entity.ShowNumber = entity.ShowNumber + 1;
+                string msg = string.Empty;
+                entity.Save(out msg);
             }
             ViewBag.Type = type;
 
             return View(entity);
         }
+
+        public ActionResult Index5(int Id)
+        {
+            var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
+            ViewBag.AppId = jsEvn.AppId;
+            ViewBag.Timestamp = jsEvn.Timestamp;
+            ViewBag.NonceStr = jsEvn.NonceStr;
+            ViewBag.Signature = jsEvn.Signature;
+            ViewBag.SqList = ValueSetService.GetValueList(SQ, true);
+            XinYuan entity = new XinYuan();
+            string type = "View";
+            if (Id == 0)
+            {
+                type = "Edit";
+                entity.InputTime = DateTime.Now;
+            }
+            else
+            {
+                entity = XinYuan.GetSingle(Id);
+                entity.ShowNumber = entity.ShowNumber + 1;
+                string msg = string.Empty;
+                entity.Save(out msg);
+            }
+            ViewBag.Type = type;
+
+            return View(entity);
+        }
+        public ActionResult Index7(int Id)
+        {
+            var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
+            ViewBag.AppId = jsEvn.AppId;
+            ViewBag.Timestamp = jsEvn.Timestamp;
+            ViewBag.NonceStr = jsEvn.NonceStr;
+            ViewBag.Signature = jsEvn.Signature;
+            ViewBag.SqList = ValueSetService.GetValueList(SQ, true);
+            HuoDong entity = new HuoDong();
+            entity = HuoDong.GetSingle(Id);
+            return View(entity);
+        }
+
         [HttpPost]
         public JsonResult Index4(string dataJson)
         {
@@ -104,6 +147,32 @@ namespace Web.Controllers
             return new JsonResult { Data = new { state = state, msg = msg } };
         }
 
-       
+
+        [HttpPost]
+        public JsonResult XinYuanRenLing(int xinyuanid,string name,string telephone,string weixinOpenId)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                XinYuanRenLing renling = new Core.Entity.XinYuanRenLing();
+                renling.InputTime = DateTime.Now;
+                renling.Name = name;
+                renling.Telephone = telephone;
+                renling.UserWeixinOpenId = weixinOpenId;
+                renling.XinyuanId = xinyuanid;
+                renling.Save(out msg);
+                
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
     }
 }

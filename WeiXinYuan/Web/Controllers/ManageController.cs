@@ -88,6 +88,7 @@ namespace Web.Controllers
             {
                 string badge = HttpContext.User.Identity.Name;
                 XinYuan postModel = Serializer.ToObject<XinYuan>(dataJson);
+                
                 postModel.Save(out msg);
             }
             catch (Exception e)

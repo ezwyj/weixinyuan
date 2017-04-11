@@ -1,4 +1,5 @@
-﻿@model Core.Entity.XinYuan
+﻿@using Common.Util;
+@model Core.Entity.XinYuan
 @{
     ViewBag.Title = "发布";
     Layout = "~/Views/Shared/_moblieLayout.cshtml";
@@ -14,21 +15,13 @@
     <div style=" width:97%; height:124px; background-color:#FFFFFF; margin-left:5px;">
         <div style="width:30%; height:124px; float:left;">
             <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">我的心愿：</font></div>
-            <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">认领人数：</font></div>
+
         </div>
         <div style="width:70%; height:124px; float:left;">
             <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="title" class="form-control" placeholder="输入我的心愿"></div>
-            <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="2" class="form-control" placeholder="0"></div>
         </div>
     </div>
-    <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-        <div style="width:30%; height:62px; float:left;">
-            <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">类   型：</font></div>
-        </div>
-        <div style="width:70%; height:62px; float:left;">
-            <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="class" class="form-control" placeholder="输入类型"></div>
-        </div>
-    </div>
+
     <div style=" width:97%; height:180px; background-color:#FFFFFF; margin-left:5px;border-bottom:1px solid #c3c3c3;">
         <div style="width:100%; height:20px; padding-left:20px; padding-top:22px;">
             <div align="left"><font color="#000000" face="黑体">理   由：</font></div>
@@ -85,7 +78,7 @@
 
         <div style=" width:97%; height:62px;">
             <div style="width:100%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;"><img src="@Url.Content("~/Content/images/提交.png")" height="28" width="124" id="submitxinyuan"/></div>
+                <div style="width:100%; height:50px; padding-top:12px;"><img src="@Url.Content("~/Content/images/提交.png")" height="28" width="124" id="submitxinyuan"/>                  </div>
             </div>
         </div>
 
@@ -96,6 +89,7 @@ else
 <div class="header-logo">
     <!--- 开头 ---->
     <div style="100%; height:1px; margin-top:5px;">
+        <input type="hidden" id="id" value="@Model.Id" />
     </div>
     <div style=" width:97%; height:124px; background-color:#FFFFFF; margin-left:5px;">
         <div style="width:30%; height:124px; float:left;">
@@ -166,12 +160,16 @@ else
 
         <div style=" width:97%; height:62px;">
             <div style="width:100%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;"></div>
+                <div style="width:100%; height:50px; padding-top:12px;">
+                    <a id="xinyuanrenling"><img src="@Url.Content("~/Content/images/认领.png")" height="20" width="64" /></a>
+                </div>
             </div>
         </div>
 
     </div>
 }
+
+
 
 
 
@@ -183,6 +181,8 @@ else
         Timestamp ='@ViewBag.Timestamp';
         NonceStr = '@ViewBag.NonceStr';
         Signature = '@ViewBag.Signature';
+
+        XinYuanModel = @Html.Raw(Serializer.ToJson<Core.Entity.XinYuan>(Model));
     </script>
 <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>

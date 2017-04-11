@@ -382,6 +382,8 @@
     <Content Include="Views\Mobile\Index7.cshtml" />
     <Content Include="Views\Mobile\index1.cshtml" />
     <Content Include="Views\Mobile\Index4.cshtml" />
+    <Content Include="Views\Mobile\Index2.cshtml" />
+    <Content Include="Views\Mobile\Index6.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,75 @@
+﻿@using Core.Entity;
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_moblieLayout.cshtml";
+    List<ChangDi> model = Model as List<Core.Entity.ChangDi>;
+
+}
+
+<div class="container">
+    <div class="header-logo">
+        <!--- 开头 ---->
+        <div style="width:100%; height:70px; background-color:#00a2ac">
+            <div style=" width:62%; height:30px; float:left; padding-top:22px;">
+                <div align="right" class="STYLE1"><font color="#FFFFFF" face="黑体">场地预约</font> </div>
+            </div>
+            <div style=" width:34%; height:50px; float:left;padding-top:26px;">
+                <div align="right"><a href="index6.html"><img src="@Url.Content("~/Content/images/提供场地.png")" height="33" width="85" /></a></div>
+            </div>
+        </div>
+        <div style="width:100%; height:250px; padding-top:0px;background-color:#00a2ac">
+            <img src="@Url.Content("~/Content/images/场地.png")" width="360" height="250" />
+        </div>
+        <!--- 选择---->
+        <div style="width:100%; height:60px;">
+            <div style="width:50%; height:60px; float:left;background-color:#00a2ac; ">
+                <div align="center" class="STYLE2 STYLE3" style="padding-top:23px;"><font color="#FFFFFF" face="黑体">社区筛选</font> </div>
+            </div>
+            <div style="width:50%; height:60px; float:left;background-color:#aaaaaa;">
+                <div align="center" class="STYLE3" style="padding-top:23px;"><font color="#000000" face="黑体">场地筛选</font> </div>
+            </div>
+        </div>
+        <!--- 内容1---->
+        @foreach (var cd in model)
+        {
+            <div style="width:100%; height:96px; padding-bottom:12px; background-color:#dddddd; ">
+                <div style="width:30%; height:92px;float:left; margin-top:6px; margin-left:6px; background-color:#00a2ac; padding-top:4px; padding-left:4px"><img src="@Url.Content("~"+ (cd.Images== null ? "/Content/images/场地.png" :"/Upload/"+Common.Util.FileHandler.getUrl(cd.Images[0].FileAddress)))" width="115" height="86" /></div>
+                <div style="width:62%; height:96px;float:left;  padding-left:15px;margin-top:6px; background-color:#00a2ac">
+                    <div style="width:96%; height:30px; padding-top:8px;border-bottom:1px dashed  #FFF;">
+                        <div class="STYLE1" style="width:66%; height:30px;float:left;padding-top:5px">
+                            <div align="left" class="STYLE3"><font color="#FFFFFF" face="黑体">@cd.Title </font></div>
+                        </div>
+                        <div style="width:30%; height:30px;float:left;padding-top:10px">
+                            <div align="left" class="STYLE10">
+                                <div align="right"><font color="#FFFFFF" face="黑体">@cd.UseTime</font></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:96%; height:23px; padding-top:2px;border-bottom:1px dashed  #FFF;">
+                        <div class="STYLE1" style="width:100%; height:20px;float:left;">
+                            <div align="left" class="STYLE10"><font face="黑体" color="#FFFFFF">@cd.ClassExp</font></div>
+                        </div>
+                    </div>
+                    <div style="width:96%; height:20px; padding-top:6px;border-bottom:1px dashed  #FFF;">
+                        <div class="STYLE1" style="width:50%; height:20px;float:left;">
+                            <div align="left" class="STYLE5 STYLE8"><font face="黑体" color="#FFFFFF">容纳人数：
+                                @cd.Max 人</font></div>
+                        </div>
+                        <div style="width:40%; height:20px;float:left;">
+                            <div align="left" class="STYLE5 STYLE8">
+                                <div align="right"><font face="黑体" color="#FFFFFF">@cd.ClassExp</font></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <!--- 内容1---->
+
+        <div style="width:100%; height:47px;"></div>
+
+
+    </div>
+
+</div>

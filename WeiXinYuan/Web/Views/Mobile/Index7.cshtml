@@ -1,6 +1,103 @@
-﻿@{
+﻿@using Common.Util;
+@model Core.Entity.HuoDong
+@{
     ViewBag.Title = "Index7";
     Layout = "~/Views/Shared/_moblieLayout.cshtml";
 }
 
 
+<div class="container">
+    <div class="header-logo">
+        <!--- 开头 ---->
+        <div style="100%; height:1px; margin-top:5px;">
+        </div>
+        <div style="width:100%; height:160px;">
+            <img src="@Url.Content( (Model.Images== null ? "~/Content/images/11_055.png" : "~/Upload/"+Common.Util.FileHandler.getUrl(Model.Images[0].FileAddress)))"@Url.Content("~/")" height="160" width="335" />
+        </div>
+        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">名  称：</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;">
+                    <div align="left">@Model.Title</div>
+                </div>
+            </div>
+        </div>
+
+        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
+            <div style="width:25%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">时  间：</font></div>
+            </div>
+            <div style="width:75%; height:62px; float:left;">
+                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">
+                    <div style=" width:45%; height:50px; padding-top:12px; float:left">@Model.StartTime</div>
+                    <div style=" width:10%; height:50px; padding-top:12px; float:left">~</div>
+                    <div style=" width:45%; height:50px; padding-top:12px;float:left">@Model.EndTime</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">地  址：</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;">
+                    <div align="left">@Model.Address</div>
+                </div>
+            </div>
+        </div>
+
+        <div style=" width:97%; height:142px; background-color:#FFFFFF; margin-left:5px;border-bottom:1px solid #c3c3c3;">
+            <div style="width:100%; height:142px; float:left;">
+                <div style="width:100%; height:120px; padding-top:22px;">
+                    <div align="left"><font color="#000000" face="黑体">   @Model.Content</font></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style=" width:97%; height:62px; background-color:#00a2ac; margin-left:5px;">
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;border-right:1px solid #c3c3c3;"><font color="#000000" face="黑体">已报人数：</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:90%; height:40px; padding-top:22px; padding-left:20px;border-bottom:1px solid #c3c3c3;">
+                    <div align="left">@Model.Add.Count 人</div>
+                </div>
+            </div>
+        </div>
+
+        <div style=" width:97%; height:62px; background-color:#666666; margin-left:5px;border-bottom:1px solid #c3c3c3;">
+            <div style="width:100%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;"><font color="#FFFFFF" face="黑体">报名列表：</font></div>
+            </div>
+        </div>
+
+        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;border-bottom:1px solid #c3c3c3;">
+            @foreach(var add in Model.Add)
+            {
+
+
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;"><font color="#000000" face="黑体">@add.Name</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:80%; height:40px; padding-top:22px; padding-left:20px;">
+                    <div align="right"><font color="#666666" face="黑体">@add.InputTimeExp</font></div>
+                </div>
+            </div> 
+            }
+        </div>
+
+        <div style=" width:97%; height:62px;">
+            <div style="width:100%; height:62px; float:left;">
+                <div style="width:50%; height:50px; padding-top:12px; float:left"><a href="" id="actionhuodong"><img src="@Url.Content("~/Content/images/关注2.png")" height="28" width="124" /></a></div>
+                <div style="width:50%; height:50px; padding-top:12px; float:left"><a href="" id="addhuodong"><img src="@Url.Content("~/Content/images/报名.png")" height="28" width="124" /></a></div>
+            </div>
+        </div>
+
+    </div>
+</div>

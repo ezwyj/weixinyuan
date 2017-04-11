@@ -92,5 +92,19 @@ namespace Common.Util
                 return fileSize.ToString() + " B";
             }
         }
+
+
+        public static string getUrl(string fileUrl)
+        {
+            string ret = string.Empty;
+
+            int uploadLocation = fileUrl.IndexOf("Upload");
+            if (uploadLocation > 0)
+            {
+                ret = fileUrl.Substring(uploadLocation + 7);
+            }
+
+            return ret;
+        }
     }
 }

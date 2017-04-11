@@ -26,6 +26,7 @@ namespace Core.Entity
         public string SQ { get; set; }
         public StatusEnum Status { get; set; }
         public string InputName { get; set; }
+        public DateTime InputTime { get; set; }
         [Ignore]
         public string StateExp
         {
@@ -34,7 +35,7 @@ namespace Core.Entity
                 return Enum.GetName(typeof(StatusEnum), Status);
             }
         }
-        public DateTime InputTime { get; set; }
+       
         [Ignore]
         public string InputTimeExp { get { return InputTime.ToString();  } }
         [Ignore]

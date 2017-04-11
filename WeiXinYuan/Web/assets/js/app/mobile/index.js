@@ -20,10 +20,7 @@
         XinYuanModel.Name = $('#name').val();
         XinYuanModel.SQ = $('#sqlist').find("option:selected").val();
         XinYuanModel.LY = $('#ly').val();
-        XinYuanModel.Status = $('#statuslist').find("option:selected").val();
         XinYuanModel.Telephone = $('#telephone').val();
-        XinYuanModel.InputTime = $('#inputtime').val();
-        XinYuanModel.InputTime = $('#inputtime').val();
 
 
         return XinYuanModel;
@@ -37,27 +34,39 @@
 
 
     $('#submitxinyuan').on('click', function () {
-        $.confirm('确定要保存吗？', function (result) {
-            if (result) {
-                $.loading('提交中，请稍后...');
-                upModelData = GetModel();
-                $.post(rootUrl + 'Manage/XinYuanDetail', {
-                    dataJson: JSON.stringify(upModelData)
-                }, function (res) {
-                    $.tlayer('close');
-                    if (!res) {
-                        $.tips('保存失败', 1);
-                    }
-                    else {
-                        $.tips('保存成功', 3);
-
-                    }
-                    window.location.href = rootUrl + 'Miblie/Index';
-                });
-
-
+        upModelData = GetModel();
+        $.post(rootUrl + 'Manage/XinYuanDetail', {
+            dataJson: JSON.stringify(upModelData)
+        }, function (res) {
+           
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
 
             }
+            window.location.href = rootUrl + 'Mobile/Index';
+        });
+    });
+
+    $('#xinyuanrenling').on('click', function () {
+
+        $.post(rootUrl + 'Mobile/XinYuanRenLing', {
+            xinyuanid: $('#id').val(),
+            name: "",
+            telephone: "",
+            weixinOpenId : ""
+        }, function (res) {
+
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
+
+            }
+            window.location.href = rootUrl + 'Mobile/Index';
         });
     });
 

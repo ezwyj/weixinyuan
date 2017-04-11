@@ -36,7 +36,7 @@
             <div style="width:60%; height:116px;float:left; padding-top:12px; padding-left:15px">
                 <div style="width:100%; height:50px; padding-top:10px">
                     <div class="STYLE1" style="width:70%; height:50px;float:left;padding-top:5px">
-                        <div align="left" class="STYLE2"><font color="#000000" face="黑体">@item.Title</font></div>
+                        <div align="left" class="STYLE2"><font color="#000000" face="黑体"><a href="@Url.Action("index4","Mobile",new { id = item.Id })"> @item.Title</a></font></div>
                     </div>
                     <div style="width:30%; height:50px;float:left;"><img src="@Url.Content("~/Content/images/关注.png")" height="21" width="21" /></div>
                 </div>
@@ -50,7 +50,7 @@
                     <div class="STYLE1" style="width:50%; height:20px;float:left;">
                         <div align="left" class="STYLE5 STYLE8"><font face="黑体">社区：@item.SQExp</font></div>
                     </div>
-                    <div style="width:50%; height:20px;float:left;"><img src="@Url.Content("~/Content/images/认领.png")" height="20" width="64" /></div>
+                    <div style="width:50%; height:20px;float:left;"><a href="@Url.Action("index4","Mobile",new { id = item.Id })"><img src="@Url.Content("~/Content/images/认领.png")" height="20" width="64" /></a></div>
                 </div>
             </div>
         </div>
@@ -72,6 +72,8 @@
         Timestamp ='@ViewBag.Timestamp';
         NonceStr = '@ViewBag.NonceStr';
         Signature = '@ViewBag.Signature';
+
+
     </script>
 
 }

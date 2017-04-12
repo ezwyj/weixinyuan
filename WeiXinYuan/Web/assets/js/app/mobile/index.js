@@ -26,12 +26,43 @@
         return XinYuanModel;
 
     }
+
+    function GetChangDiModel() {
+
+        ChangDiModel.Id = $('#id').val();
+        ChangDiModel.Title = $('#title').val();
+        ChangDiModel.Name = $('#name').val();
+        ChangDiModel.SQ = $('#sqlist').find("option:selected").val();
+        ChangDiModel.Device = $('#device').val();
+        ChangDiModel.Telephone = $('#telephone').val();
+        ChangDiModel.Address = $('#address').val();
+        ChangDiModel.Content = $('#content').val();
+        ChangDiModel.Max = $('#max').val();
+        ChangDiModel.Money = $('#money').val();
+        return XinYuanModel;
+
+    }
    
 
     //////////////////////
     //事件绑定
     //////////////////////
+    ('#changdisubmit').on('click', function () {
+        upModelData = GetChangDiModel();
+        $.post(rootUrl + 'Manage/ChangDiDetail', {
+            dataJson: JSON.stringify(upModelData)
+        }, function (res) {
+           
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
 
+            }
+            window.location.href = rootUrl + 'Mobile/Index';
+        });
+    });
 
     $('#submitxinyuan').on('click', function () {
         upModelData = GetModel();

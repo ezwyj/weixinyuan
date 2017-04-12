@@ -113,6 +113,32 @@ namespace Web.Controllers
 
             return View(entity);
         }
+
+        public ActionResult Index6(int Id)
+        {
+            var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
+            ViewBag.AppId = jsEvn.AppId;
+            ViewBag.Timestamp = jsEvn.Timestamp;
+            ViewBag.NonceStr = jsEvn.NonceStr;
+            ViewBag.Signature = jsEvn.Signature;
+            ViewBag.SqList = ValueSetService.GetValueList(SQ, true);
+            ChangDi entity = new ChangDi();
+            string type = "View";
+            if (Id == 0)
+            {
+                type = "Edit";
+                entity.InputTime = DateTime.Now;
+            }
+            else
+            {
+                entity = ChangDi.GetSingle(Id);
+
+            }
+            ViewBag.Type = type;
+
+            return View(entity);
+        }
+
         public ActionResult Index7(int Id)
         {
             var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);

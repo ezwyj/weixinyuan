@@ -71,7 +71,7 @@ namespace Core.Entity
         public string InputTimeExp { get { return InputTime.ToString(); } }
         public string InputName { get; set; }
         public int UseTime { get; set; }
-
+        public string Device { get; set; }
         [Ignore]
         public List<ChangDiAdd> Add
         {

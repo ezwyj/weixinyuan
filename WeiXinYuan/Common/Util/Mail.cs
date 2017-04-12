@@ -1,6 +1,4 @@
-﻿using MPService.Common.Operation;
-using MPService.Contract.Mail.DataItem;
-using MPService.Contract.Mail.Operation;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;

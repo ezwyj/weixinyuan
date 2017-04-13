@@ -39,7 +39,7 @@
         ChangDiModel.Content = $('#content').val();
         ChangDiModel.Max = $('#max').val();
         ChangDiModel.Money = $('#money').val();
-        return XinYuanModel;
+        return ChangDiModel;
 
     }
    
@@ -102,7 +102,43 @@
     });
 
 
+    $('#huodonggz').on('click', function () {
 
+        $.post(rootUrl + 'Mobile/HuoDongAttion', {
+            huodongid: $('#id').val(),
+            name: "",
+            telephone: "",
+            weixinOpenId: ""
+        }, function (res) {
 
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
 
+            }
+            window.location.href = rootUrl + 'Mobile/Index';
+        });
+    });
+
+    $('#huodongadd').on('click', function () {
+
+        $.post(rootUrl + 'Mobile/HuoDongAdd', {
+            huodongid: $('#id').val(),
+            name: "",
+            telephone: "",
+            weixinOpenId: ""
+        }, function (res) {
+
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
+
+            }
+            window.location.href = rootUrl + 'Mobile/Index';
+        });
+    });
 });

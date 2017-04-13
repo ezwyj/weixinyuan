@@ -200,5 +200,57 @@ namespace Web.Controllers
 
             return new JsonResult { Data = new { state = state, msg = msg } };
         }
+
+        [HttpPost]
+        public JsonResult HuoDonggz(int huodongid, string name, string telephone, string weixinOpenId)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                HuoDongAttion attion = new HuoDongAttion();
+                attion.InputTime = DateTime.Now;
+                attion.Name = name;
+                attion.HuoDongId = huodongid;
+                attion.WeixinOpenId = weixinOpenId;
+                attion.Save(out msg);
+
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
+
+        [HttpPost]
+        public JsonResult HuoDongAdd(int huodongid, string name, string telephone, string weixinOpenId)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                HuoDongAdd renling = new Core.Entity.HuoDongAdd();
+                renling.InputTime = DateTime.Now;
+                renling.Name = name;
+                renling.weixinOpenId = weixinOpenId;
+                renling.HuoDongId = huodongid;
+                renling.Save(out msg);
+
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
     }
 }

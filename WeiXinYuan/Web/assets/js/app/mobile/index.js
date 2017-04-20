@@ -47,7 +47,7 @@
     //////////////////////
     //事件绑定
     //////////////////////
-    ('#changdisubmit').on('click', function () {
+    $('#changdisubmit').on('click', function () {
         upModelData = GetChangDiModel();
         $.post(rootUrl + 'Manage/ChangDiDetail', {
             dataJson: JSON.stringify(upModelData)
@@ -101,11 +101,10 @@
         });
     });
 
+    $('#actionhuodong').on('click', function () {
 
-    $('#huodonggz').on('click', function () {
-
-        $.post(rootUrl + 'Mobile/HuoDongAttion', {
-            huodongid: $('#id').val(),
+        $.post(rootUrl + 'Mobile/HuoDonggz', {
+            huodongid: $('#huodongid').val(),
             name: "",
             telephone: "",
             weixinOpenId: ""
@@ -122,23 +121,28 @@
         });
     });
 
-    $('#huodongadd').on('click', function () {
+        
 
-        $.post(rootUrl + 'Mobile/HuoDongAdd', {
-            huodongid: $('#id').val(),
-            name: "",
-            telephone: "",
-            weixinOpenId: ""
-        }, function (res) {
+        $('#addhuodong').on('click', function () {
 
-            if (!res) {
-                alert('保存失败');
-            }
-            else {
-                alert('保存成功');
+            $.post(rootUrl + 'Mobile/HuoDongAdd', {
+                huodongid: $('#huodongid').val(),
+                name: "",
+                telephone: "",
+                weixinOpenId: ""
+            }, function (res) {
 
-            }
-            window.location.href = rootUrl + 'Mobile/Index';
+                if (!res) {
+                    alert('保存失败');
+                }
+                else {
+                    alert('保存成功');
+
+                }
+                window.location.href = rootUrl + 'Mobile/Index';
+            });
         });
+
     });
-});
+
+    

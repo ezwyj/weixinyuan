@@ -17,7 +17,7 @@ namespace Core.Entity
         public string weixinOpenId { get; set; }
         public string Name { get; set; }
         public DateTime InputTime { get; set; }
-
+        public string Telephone { get; set; }
         [Ignore]
         public string InputTimeExp { get; set; }
 

@@ -1,9 +1,13 @@
 ﻿using Common.Util;
 using Core.Entity;
 using PetaPoco;
+using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.AdvancedAPIs;
+using Senparc.Weixin.MP.CommonAPIs;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -77,6 +81,32 @@ namespace Web.Controllers
             return View(entity);
             
         }
+        private string appId = ConfigurationManager.AppSettings["WeixinAppId"];
+        private string secret = ConfigurationManager.AppSettings["WeixinAppSecret"];
+        private bool SavePicture(string name, out string msg)
+        {
+            try
+            {
+                MemoryStream front = new MemoryStream();
+                Senparc.Weixin.MP.AdvancedAPIs.MediaApi.Get(AccessTokenContainer.TryGetAccessToken(appId, secret), name, front);
+
+
+                var accessToken = AccessTokenContainer.TryGetAccessToken(appId, secret);
+                string fileName = name + ".jpg";
+                string savePath = Server.MapPath("~/Download/") + fileName;
+                FileStream writer = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.Write);
+                front.WriteTo(writer);
+                writer.Close();
+                writer.Dispose();
+                msg = string.Empty;
+                return true;
+            }
+            catch (Exception e)
+            {
+                msg = e.Message;
+                return false;
+            }
+        }
 
         [HttpPost]
         public JsonResult XinYuanDetail(string dataJson)
@@ -90,6 +120,11 @@ namespace Web.Controllers
                 XinYuan postModel = Serializer.ToObject<XinYuan>(dataJson);
                 
                 postModel.Save(out msg);
+                if (!string.IsNullOrEmpty(postModel.Image))
+                {
+                    string s = string.Empty;
+                    SavePicture(postModel.Image, out s);
+                }
             }
             catch (Exception e)
             {

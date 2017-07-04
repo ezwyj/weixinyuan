@@ -37,6 +37,7 @@
     <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
         <div style="width:30%; height:62px; float:left;">
             <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">照   片：</font></div>
+            <img id="imgCardFront" width="80" height="80" />
         </div>
         <div style="width:70%; height:62px; float:left;">
             <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><button type="submit" id="selectPicture" value="Submit">选择文件</button></div>
@@ -94,7 +95,7 @@ else
     </div>
     <div style=" width:97%; height:124px; background-color:#FFFFFF; margin-left:5px;">
         <div style="width:30%; height:124px; float:left;">
-            <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">我的心愿：</font></div>
+            <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">心愿：</font></div>
             <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">认领人数：</font></div>
         </div>
         <div style="width:70%; height:124px; float:left;">
@@ -158,16 +159,33 @@ else
                 <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">@Model.Telephone</div>
             </div>
         </div>
-
-        <div style=" width:97%; height:62px;">
-            <div style="width:100%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;">
-                    <a id="xinyuanrenling"><img src="@Url.Content("~/Content/images/认领.png")" height="20" width="64" /></a>
-                </div>
-            </div>
+    <div style=" width:97%; height:162px;">
+        <div style="width:100%; height:62px; float:left;">
+            <a id="xinyuanrenling"><img src="@Url.Content("~/Content/images/认领.png")" height="20" width="64" /></a>
         </div>
 
+        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">认领人：</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="rlname" class="form-control" placeholder="认领人"></div>
+            </div>
+        </div>
+        <div style=" width:97%; height:72px; background-color:#FFFFFF; margin-left:5px;">
+            <div style="width:30%; height:62px; float:left;">
+                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">认领联系电话：</font></div>
+            </div>
+            <div style="width:70%; height:62px; float:left;">
+                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="rltele" class="form-control" placeholder="认领联系电话"></div>
+            </div>
+        </div>
     </div>
+        
+
+    </div>
+    
+
 }
 
 
@@ -182,7 +200,7 @@ else
         Timestamp ='@ViewBag.Timestamp';
         NonceStr = '@ViewBag.NonceStr';
         Signature = '@ViewBag.Signature';
-
+        loginUser = '@ViewBag.LoginUser';
         XinYuanModel = @Html.Raw(Serializer.ToJson<Core.Entity.XinYuan>(Model));
     </script>
 <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>

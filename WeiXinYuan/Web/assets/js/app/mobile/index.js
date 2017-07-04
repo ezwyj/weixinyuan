@@ -21,7 +21,7 @@
         XinYuanModel.SQ = $('#sqlist').find("option:selected").val();
         XinYuanModel.LY = $('#ly').val();
         XinYuanModel.Telephone = $('#telephone').val();
-
+        XinYuanModel.Image = $('#imgCardFront').attr('title');
 
         return XinYuanModel;
 
@@ -43,7 +43,23 @@
 
     }
    
+    var syncUpload = function (localIds, targetInput) {
+        var localId = localIds.pop();
 
+
+        wx.uploadImage({
+            localId: localId,
+            isShowProgressTips: 1,
+            success: function (res) {
+                var serverId = res.serverId; // 返回图片的服务器端ID
+                $("#" + targetInput).attr('title', serverId);
+                //其他对serverId做处理的代码
+                //if (localIds.length > 0) {
+                //    syncUpload(localIds);
+                //}
+            }
+        });
+    };
     //////////////////////
     //事件绑定
     //////////////////////
@@ -65,6 +81,7 @@
     });
 
     $('#submitxinyuan').on('click', function () {
+        ///提交心愿
         upModelData = GetModel();
         $.post(rootUrl + 'Manage/XinYuanDetail', {
             dataJson: JSON.stringify(upModelData)
@@ -85,9 +102,9 @@
 
         $.post(rootUrl + 'Mobile/XinYuanRenLing', {
             xinyuanid: $('#id').val(),
-            name: "",
-            telephone: "",
-            weixinOpenId : ""
+            name: $('#rlname').val(),
+            telephone: $('#rltele').val(),
+            weixinOpenId: ''
         }, function (res) {
 
             if (!res) {
@@ -121,7 +138,16 @@
         });
     });
 
-        
+    $('#selectPicture').on('click', function () {
+
+        wx.chooseImage({
+            success: function (res) {
+                var localIds = res.localIds;
+                $("#imgCardFront").attr('src', localIds[0]);
+                syncUpload(localIds, 'imgCardFront');
+            }
+        });
+    });
 
         $('#addhuodong').on('click', function () {
 

@@ -61,12 +61,41 @@
     </div>
     <!--- 底部 ---->
     <div style="width:100%; height:47px;position:fixed;    bottom:0; background-color:#000000">
-        <div style="width:33%; height:47px;float:left;"><a href="@Url.Action("Index","Mobile")"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a></div>
-        <div style="width:33%; height:47px;float:left;"><a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a></div>
-        <div style="width:33%; height:47px;float:left;"><a href="@Url.Action("Index2","Mobile")"><img src="@Url.Content("~/Content/images/场地预约.png")" width="90" height="47" /></a></div>
+        <div style="width:33%; height:47px;float:left;">
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index")
+            {
+                <a href="@Url.Action("Index","Mobile")"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index","Mobile")"><img src="@Url.Content("~/Content/images/微心愿.png")" width="90" height="47" /></a>
+            }
+
+        </div>
+        <div style="width:33%; height:47px;float:left;">
+        @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index1")
+            {
+            <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动选中.png")" width="90" height="47" /></a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a>
+        }
+        </div>
+        <div style="width:33%; height:47px;float:left;">
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index2")
+            {
+                <a href="@Url.Action("Index2","Mobile")"><img src="@Url.Content("~/Content/images/场地预约选中.png")" width="90" height="47" /></a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index2","Mobile")"><img src="@Url.Content("~/Content/images/场地预约.png")" width="90" height="47" /></a>
+            }
+        </div>
 
     </div>
     <script type="text/javascript" src="@Url.Content("~/assets/js/lib/require.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/main.js")"></script>
+    ;
 </body>
 </html>

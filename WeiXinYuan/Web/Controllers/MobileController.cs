@@ -64,13 +64,14 @@ namespace Web.Controllers
             return result;
         }
 
-
+        static int SQ = int.Parse(ConfigurationManager.AppSettings["sq"].ToString());
+        static int Class = int.Parse(ConfigurationManager.AppSettings["class"].ToString());
         //
         // GET: /Mobile/
         private string appId = ConfigurationManager.AppSettings["WeixinAppId"];
         private string secret = ConfigurationManager.AppSettings["WeixinAppSecret"];
 
-        public ActionResult Index()
+        public ActionResult Index(string sq="00")
         {
             string msg = string.Empty;
             
@@ -82,8 +83,14 @@ namespace Web.Controllers
             ViewBag.Timestamp = jsEvn.Timestamp;
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
-
-            return View(XinYuan.GetListByProperty(a => a.Status, (int)StatusEnum.报名中).ToList());
+            ViewBag.SelectSq = sq;
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            var retRecord = XinYuan.GetListByProperty(a => a.Status, (int)StatusEnum.报名中);
+            if (sq != "00")
+            {
+                retRecord = retRecord.Where(b => b.SQ == sq).ToList();
+            }
+            return View(retRecord);
         }
 
         public ActionResult Index1()
@@ -104,8 +111,7 @@ namespace Web.Controllers
             ViewBag.Signature = jsEvn.Signature;
             return View(ChangDi.GetList());
         }
-        static int SQ = int.Parse(ConfigurationManager.AppSettings["sq"].ToString());
-        static int Class = int.Parse(ConfigurationManager.AppSettings["class"].ToString());
+
         public ActionResult Index3()
         {
             var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
@@ -134,7 +140,6 @@ namespace Web.Controllers
             else
             {
                 entity = XinYuan.GetSingle(Id);
-                entity.ShowNumber = entity.ShowNumber + 1;
                 string msg = string.Empty;
                 entity.Save(out msg);
             }
@@ -161,7 +166,6 @@ namespace Web.Controllers
             else
             {
                 entity = XinYuan.GetSingle(Id);
-                entity.ShowNumber = entity.ShowNumber + 1;
                 string msg = string.Empty;
                 entity.Save(out msg);
             }
@@ -293,12 +297,13 @@ namespace Web.Controllers
             try
             {
                 string badge = HttpContext.User.Identity.Name;
-                HuoDongAdd renling = new Core.Entity.HuoDongAdd();
-                renling.InputTime = DateTime.Now;
-                renling.Name = name;
-                renling.weixinOpenId = weixinOpenId;
-                renling.HuoDongId = huodongid;
-                renling.Save(out msg);
+                HuoDongAdd huodong = new Core.Entity.HuoDongAdd();
+                huodong.InputTime = DateTime.Now;
+                huodong.Name = name;
+                huodong.Telephone = telephone;
+                huodong.weixinOpenId = weixinOpenId;
+                huodong.HuoDongId = huodongid;
+                huodong.Save(out msg);
 
             }
             catch (Exception e)

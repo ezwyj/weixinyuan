@@ -24,7 +24,7 @@ namespace Core.Entity
         public string Class { get; set; }
 
         public string SQ { get; set; }
-        public int ShowNumber { get; set; }
+        public int Number { get; set; }
         /// <summary>
         /// 认领人数
         /// </summary>

@@ -1,14 +1,21 @@
 ﻿
 @{
-    
-}
-<!DOCTYPE html>
 
+}
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN"
+          "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html>
 <head>
     <title>微心愿</title>
     <!--Custom Theme files-->
-    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" media="all" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!--Custom Theme files-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,7 +23,7 @@
     <style type="text/css">
         <!--
         .STYLE1 {
-            font-size: 30px;
+            font-size: 20px;
         }
 
         .STYLE2 {
@@ -52,7 +59,7 @@
     <div id="home" class="header-top">
         <!--- container ---->
         <div class="container">
-            
+
             @RenderBody()
         </div>
     </div>
@@ -62,7 +69,7 @@
     <!--- 底部 ---->
     <div style="width:100%; height:47px;position:fixed;    bottom:0; background-color:#000000">
         <div style="width:33%; height:47px;float:left;">
-            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index")
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "index4")
             {
                 <a href="@Url.Action("Index","Mobile")"><img src="@Url.Content("~/Content/images/微心愿选中.png")" width="90" height="47" /></a>
             }
@@ -73,14 +80,14 @@
 
         </div>
         <div style="width:33%; height:47px;float:left;">
-        @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index1")
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index1")
             {
-            <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动选中.png")" width="90" height="47" /></a>
-        }
-        else
-        {
-            <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a>
-        }
+                <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动选中.png")" width="90" height="47" /></a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动.png")" width="90" height="47" /></a>
+            }
         </div>
         <div style="width:33%; height:47px;float:left;">
             @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index2")
@@ -96,6 +103,6 @@
     </div>
     <script type="text/javascript" src="@Url.Content("~/assets/js/lib/require.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/main.js")"></script>
-    ;
+
 </body>
 </html>

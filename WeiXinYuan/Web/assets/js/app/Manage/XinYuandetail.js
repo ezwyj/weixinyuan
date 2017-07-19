@@ -31,8 +31,7 @@
         XinYuanModel.Status = $('#statuslist').find("option:selected").val();
         XinYuanModel.Telephone = $('#telephone').val();
         XinYuanModel.InputTime = $('#inputtime').val();
-        XinYuanModel.InputTime = $('#inputtime').val();
-
+        XinYuanModel.Number = $('#number').val();
 
         return XinYuanModel;
 
@@ -79,7 +78,32 @@
 
     
    
+    $('#changeState').on('click', function (e) {
 
+        $.confirm('确定要发放吗？', function (result) {
+            if (result) {
+                $.loading('提交中，请稍后...');
+                upModelData = GetModel();
+                $.post(rootUrl + 'Manage/ChangeXinYuanRenLingState', {
+                    id: e.target.getAttribute('data-data')
+                }, function (res) {
+                    $.tlayer('close');
+                    if (!res) {
+                        $.tips('认领失败', 1);
+                    }
+                    else {
+                        $.tips('认领成功', 3);
+
+                    }
+                    window.location.href = rootUrl + 'Manage/XinYuanIndex';
+                });
+
+
+
+            }
+        });
+
+    });
     
 
 });

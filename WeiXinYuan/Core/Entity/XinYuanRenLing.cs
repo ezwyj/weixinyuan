@@ -24,5 +24,22 @@ namespace Core.Entity
         }
         public string Telephone { get; set; }
 
+        public bool State { get; set; }
+        [Ignore]
+        public string StateExp
+        {
+            get {
+                if (State != null)
+                {
+                    return State == true ? "已发放" : "未发放";
+                }
+                else
+                {
+                    return "";
+                }
+                
+
+            }
+        }
     }
 }

@@ -82,7 +82,15 @@
 
     $('#submitxinyuan').on('click', function () {
         ///提交心愿
+       
+
         upModelData = GetModel();
+
+        if (upModelData.Title == "" || upModelData.LY == "") {
+            alert('未输入完整信息');
+            return;
+        }
+
         $.post(rootUrl + 'Manage/XinYuanDetail', {
             dataJson: JSON.stringify(upModelData)
         }, function (res) {
@@ -153,8 +161,8 @@
 
             $.post(rootUrl + 'Mobile/HuoDongAdd', {
                 huodongid: $('#huodongid').val(),
-                name: "",
-                telephone: "",
+                name: $('#baoming').val(),
+                telephone: $('#baomingtele').val(),
                 weixinOpenId: ""
             }, function (res) {
 
@@ -165,7 +173,7 @@
                     alert('保存成功');
 
                 }
-                window.location.href = rootUrl + 'Mobile/Index';
+                window.location.href = rootUrl + 'Mobile/Index1';
             });
         });
 

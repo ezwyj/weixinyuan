@@ -39,7 +39,7 @@
                                 <select class="form-control" id="sqlist">
                                     @foreach (var sq in SQList)
                                     {
-                                        <option value="@sq.Id" @Html.Raw(sq.Value == targetObject.SQ ? "selected" : "")>@sq.Text</option>
+                                        <option value="@sq.Id" @Html.Raw(sq.Id.ToString() == targetObject.SQ ? "selected" : "")>@sq.Text</option>
                                     }
                                 </select>
                             </div>
@@ -52,7 +52,7 @@
                                 <select class="form-control" id="statuslist">
                                     @foreach (var state in stateList)
                                     {
-                                        <option value="@state.Value" @Html.Raw(state.Value == targetObject.Status.ToString() ? "selected" : "")>@state.Text</option>
+                                        <option value="@state.Value" @Html.Raw(state.Value == ((int)targetObject.Status).ToString() ? "selected" : "")>@state.Text</option>
                                     }
                                     </select>
                             </div>
@@ -107,9 +107,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="item">
-                            <div class="item-name"></div>
+                            <div class="item-name">数量</div>
                             <div class="item-static">
-                                
+                                <input id="number" value="@targetObject.Number" />
                             </div>
                         </div>
                     </div>
@@ -130,6 +130,8 @@
                         <th>认领人</th>
                         <th>电话</th>
                         <th>认领时间</th>
+                        <th>认领状态</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -140,7 +142,8 @@
                                 <td>@row.Name</td>
                                 <td>@row.Telephone</td>
                                 <td>@row.InputTime</td>
-
+                                <td>@row.StateExp</td>
+                                <td><button class="btn btn-sm btn-primary" id="changeState" data-data="@row.Id" >发放确认</button></td>
                              </tr>
                     }
                 </tbody>

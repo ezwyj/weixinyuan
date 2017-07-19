@@ -290,5 +290,26 @@ namespace Web.Controllers
 
             return new JsonResult { Data = new { state = state, msg = msg } };
         }
+
+        [HttpPost]
+        public JsonResult ChangeXinYuanRenLingState(int id)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                XinYuanRenLing entity = XinYuanRenLing.GetSingle(id);
+                entity.State = true;
+                entity.Save(out msg);
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
     }
 }

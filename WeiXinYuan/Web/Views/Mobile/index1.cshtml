@@ -4,6 +4,8 @@
     ViewBag.Title = "index1";
     Layout = "~/Views/Shared/_moblieLayout.cshtml";
     List<HuoDong> model = Model as List<Core.Entity.HuoDong>;
+    List<ValueSet.Entity.ValueSetEntity> SQList = ViewBag.SQList as List<ValueSet.Entity.ValueSetEntity>;
+    string selectSQ = ViewBag.SelectSq;
 }
 
 <div class="header-logo">
@@ -20,10 +22,21 @@
         <img src="@Url.Content("~/Content/images/11_07.png")" width="360" height="250" />
     </div>
     <!--- 选择---->
-    <div style="width:100%; height:40px;">
+    <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
+        <div style="width:30%; height:62px; float:left;">
+            <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">选择社区：</font></div>
+        </div>
+        <div style="width:70%; height:62px; float:left;">
+            <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">
+                <select style="width:80%; height:30px;" id="sqlist">
+                    <option value="00">全部</option>
+                    @foreach (var sq in SQList)
+                    {
+                        <option value="@sq.Id" @Html.Raw(sq.Value == selectSQ ? "selected" : "")>@sq.Text</option>
+                    }
+                </select>
 
-        <div style="width:100%; height:40px; float:left;background-color:#aaaaaa;">
-            <div align="center" class="STYLE2" style="padding-top:11px;"><font color="#000000" face="黑体">场地筛选</font> </div>
+            </div>
         </div>
     </div>
 

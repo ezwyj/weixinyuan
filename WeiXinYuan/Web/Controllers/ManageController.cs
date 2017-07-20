@@ -24,6 +24,7 @@ namespace Web.Controllers
         public ActionResult XinYuanIndex()
         {
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+
             return View();
         }
         public JsonResult XinYuanSearchList(int pageIndex, int pageSize,string sq,string name)
@@ -33,7 +34,10 @@ namespace Web.Controllers
             long total = 0;
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
             List<XinYuan> serachList = null;
-
+            //if (HttpContext.Current.User.Identity.Name!="admin")
+            //{
+            //  //  sq =  
+            //}
             msg = "";
             Page<XinYuan> Page = null;
             try
@@ -135,6 +139,27 @@ namespace Web.Controllers
             return new JsonResult { Data = new { state = state, msg = msg } };
         }
 
+        [HttpPost]
+        public JsonResult XinYuanDelete(int id)
+        {
+            bool state = true;
+            string msg = string.Empty;
+
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                XinYuan postModel = XinYuan.GetSingle(id);
+
+                state=  postModel.Delete (out msg);
+                
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
 
         public ActionResult HuoDongIndex()
         {
@@ -207,7 +232,27 @@ namespace Web.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult HuodongDelete(int id)
+        {
+            bool state = true;
+            string msg = string.Empty;
 
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                HuoDong postModel = HuoDong.GetSingle(id);
+
+                state = postModel.Delete(out msg);
+
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
         [HttpPost]
         public JsonResult HuoDongDetail(string dataJson)
         {
@@ -229,7 +274,27 @@ namespace Web.Controllers
             return new JsonResult { Data = new { state = state, msg = msg } };
         }
 
+        [HttpPost]
+        public JsonResult ChangeDiDelete(int id)
+        {
+            bool state = true;
+            string msg = string.Empty;
 
+            try
+            {
+                string badge = HttpContext.User.Identity.Name;
+                ChangDi postModel = ChangDi.GetSingle(id);
+
+                state = postModel.Delete(out msg);
+
+            }
+            catch (Exception e)
+            {
+                state = false;
+                msg = e.Message;
+            }
+            return new JsonResult { Data = new { state = state, msg = msg } };
+        }
         public ActionResult ChangDiIndex()
         {
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);

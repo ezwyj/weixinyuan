@@ -93,23 +93,38 @@ namespace Web.Controllers
             return View(retRecord);
         }
 
-        public ActionResult Index1()
+        public ActionResult Index1(string sq)
         {
             var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
             ViewBag.AppId = jsEvn.AppId;
             ViewBag.Timestamp = jsEvn.Timestamp;
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
-            return View(HuoDong.GetListByProperty(a=>a.Status,(int)StatusEnum.报名中).ToList());
+            ViewBag.SelectSq = sq;
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            var retRecord = HuoDong.GetListByProperty(a => a.Status, (int)StatusEnum.报名中).ToList();
+            if (sq != "00")
+            {
+                retRecord = retRecord.Where(b => b.SQ == sq).ToList();
+            }
+            return View(retRecord);
         }
-        public ActionResult Index2()
+        public ActionResult Index2(string sq)
         {
             var jsEvn = JSSDKHelper.GetJsSdkUiPackage(appId, secret, Request.Url.AbsoluteUri);
             ViewBag.AppId = jsEvn.AppId;
             ViewBag.Timestamp = jsEvn.Timestamp;
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
-            return View(ChangDi.GetList());
+ 
+            ViewBag.SelectSq = sq;
+            ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
+            var retRecord = ChangDi.GetList();
+            if (sq != "00")
+            {
+                retRecord = retRecord.Where(b => b.SQ == sq).ToList();
+            }
+            return View(retRecord);
         }
 
         public ActionResult Index3()

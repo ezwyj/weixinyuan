@@ -86,7 +86,7 @@ namespace Web.Controllers
             ViewBag.SelectSq = sq;
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
             var retRecord = XinYuan.GetListByProperty(a => a.Status, (int)StatusEnum.报名中);
-            if (sq != "00")
+            if (sq != "00" && !string.IsNullOrEmpty(sq))
             {
                 retRecord = retRecord.Where(b => b.SQ == sq).ToList();
             }
@@ -103,7 +103,7 @@ namespace Web.Controllers
             ViewBag.SelectSq = sq;
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
             var retRecord = HuoDong.GetListByProperty(a => a.Status, (int)StatusEnum.报名中).ToList();
-            if (sq != "00")
+            if (sq != "00" && !string.IsNullOrEmpty(sq))
             {
                 retRecord = retRecord.Where(b => b.SQ == sq).ToList();
             }

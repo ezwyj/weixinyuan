@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DogNet.Repositories;
 using PetaPoco;
 using Account.Entity;
+using Common.Entity;
 
 namespace Core.Entity
 {
@@ -35,6 +36,34 @@ namespace Core.Entity
             } }
 
         public string Image { get; set; }
+        [Ignore]
+        public List<Common.Entity.AttachmentEntity> Images
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Image))
+                {
+                    List<AttachmentEntity> attachmentList = new List<AttachmentEntity>();
+                    List<string> fileIdList = Image.Split(',').ToList();
+
+                    foreach (var fileId in fileIdList)
+                    {
+                        AttachmentEntity file = AttachmentEntity.GetSingle(int.Parse(fileId));
+
+                        if (file != null)
+                        {
+                            attachmentList.Add(file);
+                        }
+                    }
+                    return attachmentList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
 
         public string Name { get; set; }
 

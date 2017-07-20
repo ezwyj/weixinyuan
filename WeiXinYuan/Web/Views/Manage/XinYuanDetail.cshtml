@@ -80,17 +80,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row item-row">
-                <div class="col-md-12">
-                    <div class="item">
-                        <div class="item-name">图片：</div>
-                        <div class="item-control">
-                            <img src="" width="200px" height="200px"/>
+           <div class="row item-row">
+                    <div class="col-md-12">
+                        <div class="item">
+                            <div class="item-name">图片：</div>
+                            <div class="item-control">
+                                @foreach (var file in targetObject.Images)
+                                {
+                                    <div class="finish-queue-item">
+                                        <span class="icon @Common.Util.FileHandler.GetFileIcon(file.FileType)"></span>
+                                        <span class="file-name" title="@file.FileName">@file.FileName</span>
+                                        <span class="file-size">@Common.Util.FileHandler.getFileSize(file.FileSize)</span>
+                                        <a class="file-operate" href="@Url.Content("~/Common/DownloadAttachment?id=" + file.Id)">下载</a>&nbsp;
+
+
+
+                                    </div>
+                                }
+                                <button class="btn btn-sm btn-primary" id="select-attachment">　附件　</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                <div class="row item-row">
+           <div class="row item-row">
                     <div class="col-md-4">
                         <div class="item">
                             <div class="item-name">电话：</div>

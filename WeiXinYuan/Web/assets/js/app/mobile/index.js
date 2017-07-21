@@ -27,6 +27,34 @@
 
     }
 
+    function GetHuoDongModel() {
+
+        HuoDongModel.Id = $('#id').val();
+        HuoDongModel.Title = $('#title').val();
+        HuoDongModel.InputName = $('#name').val();
+        HuoDongModel.SQ = $('#sqlist').find("option:selected").val();
+        HuoDongModel.Content = $('#Content').val();
+        HuoDongModel.Status = $('#statuslist').find("option:selected").val();
+        HuoDongModel.InputTime = $('#inputtime').val();
+        HuoDongModel.Max = $('#max').val();
+        HuoDongModel.Address = $('#address').val();
+        HuoDongModel.StartTime = $('#starttime').val();
+        HuoDongModel.EndTime = $('#endtime').val();
+
+        var attachments = [];
+        var panel = $('.panel-body');
+        panel.find('.finish-queue-item').each(function () {
+            if ($(this).data('fileid')) {
+                attachments.push($(this).data('fileid'));
+            }
+        });
+
+        HuoDongModel.Image = attachments.join();
+
+        return HuoDongModel;
+
+    }
+
     function GetChangDiModel() {
 
         ChangDiModel.Id = $('#id').val();
@@ -106,6 +134,32 @@
         });
     });
 
+    $('#submithuodong').on('click', function () {
+        ///提交活动
+
+
+        upModelData = GetHuoDongModel();
+
+        if (upModelData.Title == "" || upModelData.LY == "") {
+            alert('未输入完整信息');
+            return;
+        }
+
+        $.post(rootUrl + 'Manage/HuodongDetail', {
+            dataJson: JSON.stringify(upModelData)
+        }, function (res) {
+
+            if (!res) {
+                alert('保存失败');
+            }
+            else {
+                alert('保存成功');
+
+            }
+            window.location.href = rootUrl + 'Mobile/Index1';
+        });
+    });
+
     $('#xinyuanrenling').on('click', function () {
 
         $.post(rootUrl + 'Mobile/XinYuanRenLing', {
@@ -157,7 +211,7 @@
         });
     });
 
-        $('#addhuodong').on('click', function () {
+    $('#addhuodong').on('click', function () {
 
             $.post(rootUrl + 'Mobile/HuoDongAdd', {
                 huodongid: $('#huodongid').val(),
@@ -177,6 +231,11 @@
             });
         });
 
+
+    $('#sqlist').on('change', function (e) {
+        var checkValue = $("#sqlist").val();
+        window.location = window.location.pathname + '?sq=' + checkValue;
+        });
     });
 
     

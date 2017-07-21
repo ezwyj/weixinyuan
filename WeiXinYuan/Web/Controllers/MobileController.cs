@@ -171,7 +171,7 @@ namespace Web.Controllers
             ViewBag.NonceStr = jsEvn.NonceStr;
             ViewBag.Signature = jsEvn.Signature;
             ViewBag.SqList = ValueSetService.GetValueList(SQ, true);
-            XinYuan entity = new XinYuan();
+            HuoDong entity = new HuoDong();
             string type = "View";
             if (Id == 0)
             {
@@ -180,7 +180,7 @@ namespace Web.Controllers
             }
             else
             {
-                entity = XinYuan.GetSingle(Id);
+                entity = HuoDong.GetSingle(Id);
                 string msg = string.Empty;
                 entity.Save(out msg);
             }

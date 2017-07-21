@@ -31,7 +31,7 @@
                     <option value="00">全部</option>
                     @foreach (var sq in SQList)
                     {
-                        <option value="@sq.Id" @Html.Raw(sq.Value == selectSQ ? "selected" : "")>@sq.Text</option>
+                        <option value="@sq.Id" @Html.Raw(sq.Id.ToString() == selectSQ ? "selected" : "")>@sq.Text</option>
                     }
                 </select>
 

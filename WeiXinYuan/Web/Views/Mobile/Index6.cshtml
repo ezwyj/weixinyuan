@@ -6,8 +6,6 @@
     String Type = ViewBag.Type;
     List<ValueSet.Entity.ValueSetEntity> SqList = ViewBag.SqList as List<ValueSet.Entity.ValueSetEntity>;
 }
-@if (Type == "Edit")
-{
     <div class="header-logo">
         <!--- 开头 ---->
         <div style="100%; height:1px; margin-top:5px;">
@@ -17,7 +15,7 @@
                 <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">场地名称：</font></div>
             </div>
             <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="title" class="form-control" placeholder="输入场地名称"></div>
+                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">@Model.Title</div>
             </div>
         </div>
         <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
@@ -27,32 +25,18 @@
             <div style="width:70%; height:62px; float:left;">
                 <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">
 
-                    <select style="width:80%; height:30px;">
-                        @foreach (var sqItem in SqList)
-                        {
-                            <option value="@sqItem.Id">@sqItem.Text</option>
-                        }
-
-
-                    </select>
+                    @Model.SQExp
                 </div>
             </div>
         </div>
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">照   片：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><button type="submit" value="Submit">选择文件</button></div>
-            </div>
-        </div>
+
 
         <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
             <div style="width:40%; height:62px; float:left;">
                 <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">容纳人数：</font></div>
             </div>
             <div style="width:60%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="Max" class="form-control" placeholder=" 10 人"></div>
+                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">@Model.Max</div>
             </div>
         </div>
         <div style=" width:97%; height:180px; background-color:#FFFFFF; margin-left:5px;border-bottom:1px solid #c3c3c3;">
@@ -61,140 +45,7 @@
             </div>
             <div style="width:90%; height:150px; float:left;">
                 <div style="width:100%; height:150px; padding-top:12px; padding-left:10px;">
-                    <textarea type="text4" id="4" class="form-control2" placeholder=" 请详细填写内容！"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">室内/室外：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">
-                    <select style="width:50%; height:30px;">
-                        <option value="1">室内</option>
-                        <option value="2">室外</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">设施情况：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="3" class="form-control" placeholder="如茶水、音响、投影仪等设备"></div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">费  用：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="money" class="form-control" placeholder="点击输入费用！"></div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">场地地址：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="address" class="form-control" placeholder="输入场地详细地址"></div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">联系人：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="name" class="form-control" placeholder="输入联系人"></div>
-            </div>
-        </div>
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">联系方式：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="telephone" class="form-control" placeholder="输入联系方式"></div>
-            </div>
-        </div>
-        <div style=" width:97%; height:82px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;"><font color="#000000" face="黑体">描  述：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;"><input type="text" id="content" class="form-control" placeholder="输入场地简介"></div>
-            </div>
-        </div>
-        <div style=" width:97%; height:62px;">
-            <div style="width:100%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;"><img src="@Url.Content("~/Content/images/提交.png")" height="28" width="124"  id="changdisubmit"/></div>
-            </div>
-        </div>
-
-    </div>
-}
-else
-{
-    <div class="header-logo">
-        <!--- 开头 ---->
-        <div style="100%; height:1px; margin-top:5px;">
-        </div>
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">场地名称：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="title" class="form-control" placeholder="输入场地名称"></div>
-            </div>
-        </div>
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">所属社区：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;">
-
-                    <select style="width:80%; height:30px;">
-                        @foreach (var sqItem in SqList)
-                        {
-                            <option value="@sqItem.Id">@sqItem.Text</option>
-                        }
-
-
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:30%; height:62px; float:left;">
-                <div style="width:100%; height:45px; padding-top:17px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">照   片：</font></div>
-            </div>
-            <div style="width:70%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><button type="submit" value="Submit">选择文件</button></div>
-            </div>
-        </div>
-
-        <div style=" width:97%; height:62px; background-color:#FFFFFF; margin-left:5px;">
-            <div style="width:40%; height:62px; float:left;">
-                <div style="width:100%; height:40px; padding-top:22px;border-bottom:1px solid #c3c3c3;"><font color="#000000" face="黑体">容纳人数：</font></div>
-            </div>
-            <div style="width:60%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;border-bottom:1px solid #c3c3c3;"><input type="text" id="Max" class="form-control" placeholder=" 10 人"></div>
-            </div>
-        </div>
-        <div style=" width:97%; height:180px; background-color:#FFFFFF; margin-left:5px;border-bottom:1px solid #c3c3c3;">
-            <div style="width:100%; height:20px; padding-left:20px; padding-top:22px;">
-                <div align="left"><font color="#000000" face="黑体">可用时段：</font></div>
-            </div>
-            <div style="width:90%; height:150px; float:left;">
-                <div style="width:100%; height:150px; padding-top:12px; padding-left:10px;">
-                    <textarea type="text4" id="4" class="form-control2" placeholder=" 请详细填写内容！">@Model.CanUseTime</textarea>
+                    <textarea type="text4" id="4" class="form-control2" readonly>@Model.CanUseTime</textarea>
                 </div>
             </div>
         </div>
@@ -263,12 +114,11 @@ else
         </div>
         <div style=" width:97%; height:62px;">
             <div style="width:100%; height:62px; float:left;">
-                <div style="width:100%; height:50px; padding-top:12px;"><a href="" id="changdisubmit"><img src="@Url.Content("!/Content/images/提交.png")" height="28" width="124" /></a></div>
+                <div style="width:100%; height:50px; padding-top:12px;"></div>
             </div>
         </div>
 
     </div>
-}
 @section scripts {
     <script>
         OP_CONFIG.module = 'mobile';

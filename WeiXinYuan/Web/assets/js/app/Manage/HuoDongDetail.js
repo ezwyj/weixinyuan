@@ -156,6 +156,31 @@
 
     });
 
+    $('#delete').on('click', function () {
+        $.confirm('确定要删除吗？', function (result) {
+            if (result) {
+                $.loading('提交中，请稍后...');
+
+                $.post(rootUrl + 'Manage/HuodongDelete', {
+                    id: $('#id').val()
+                }, function (res) {
+                    $.tlayer('close');
+                    if (!res) {
+                        $.tips('删除失败', 1);
+                    }
+                    else {
+                        $.tips('删除成功', 3);
+
+                    }
+                    window.location.href = rootUrl + 'Manage/HuoDongIndex';
+                });
+
+
+
+            }
+        });
+
+    });
 
 
 

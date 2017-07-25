@@ -85,8 +85,10 @@
                     <div class="item">
                         <div class="item-name">图片：</div>
                         <div class="item-control">
-                           @foreach (var file in targetObject.Images)
-                           {
+                        @if (targetObject.Images != null)
+                        {
+                            foreach (var file in targetObject.Images)
+                            {
                             <div class="finish-queue-item">
                                 <span class="icon @Common.Util.FileHandler.GetFileIcon(file.FileType)"></span>
                                 <span class="file-name" title="@file.FileName">@file.FileName</span>
@@ -96,7 +98,8 @@
 
 
                             </div>
-                           }
+                            }
+                        }
                             <button class="btn btn-sm btn-primary" id="select-attachment">　附件　</button>
                         </div>
                     </div>

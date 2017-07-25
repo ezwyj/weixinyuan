@@ -120,7 +120,7 @@ namespace Web.Controllers
             ViewBag.SelectSq = sq;
             ViewBag.SQList = ValueSetService.GetValueList(SQ, true);
             var retRecord = ChangDi.GetList();
-            if (sq != "00")
+            if (sq != "00" && !string.IsNullOrEmpty(sq))
             {
                 retRecord = retRecord.Where(b => b.SQ == sq).ToList();
             }

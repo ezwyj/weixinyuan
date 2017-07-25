@@ -21,6 +21,7 @@
                     摘要：<span class="npi-title">@targetObject.Title</span>
                 </h5>
                 <div class="panel-option">
+                    <button class="btn btn-sm btn-danger" id="delete">删除</button>
                     <button class="btn btn-sm btn-primary" id="save">保存</button>
                 </div>
             </div>
@@ -85,7 +86,9 @@
                         <div class="item">
                             <div class="item-name">图片：</div>
                             <div class="item-control">
-                                @foreach (var file in targetObject.Images)
+                            @if (targetObject.Images != null)
+                            {
+                                foreach (var file in targetObject.Images)
                                 {
                                     <div class="finish-queue-item">
                                         <span class="icon @Common.Util.FileHandler.GetFileIcon(file.FileType)"></span>
@@ -97,6 +100,7 @@
 
                                     </div>
                                 }
+                            }
                                 <button class="btn btn-sm btn-primary" id="select-attachment">　附件　</button>
                             </div>
                         </div>

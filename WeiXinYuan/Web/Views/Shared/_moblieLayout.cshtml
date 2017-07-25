@@ -80,7 +80,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         </div>
         <div style="width:33%; height:47px;float:left;">
-            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index1")
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index1" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "index5")
             {
                 <a href="@Url.Action("Index1","Mobile")"><img src="@Url.Content("~/Content/images/线下活动选中.png")" width="90" height="47" /></a>
             }
@@ -90,7 +90,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             }
         </div>
         <div style="width:33%; height:47px;float:left;">
-            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index2")
+            @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index2" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "index6")
             {
                 <a href="@Url.Action("Index2","Mobile")"><img src="@Url.Content("~/Content/images/场地预约选中.png")" width="90" height="47" /></a>
             }
